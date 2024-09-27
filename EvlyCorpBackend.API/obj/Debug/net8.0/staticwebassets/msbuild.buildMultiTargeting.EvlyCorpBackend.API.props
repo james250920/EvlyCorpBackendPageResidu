@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EvlyCorpBackend.API.props" />
+</Project>

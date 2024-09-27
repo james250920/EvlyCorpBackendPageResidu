@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "V/XngkSQdFdK9qoOOKB92otGZUdpENSw1kOmdI5VRfs=",
+  "Source": "EvlyCorpBackend.API",
+  "BasePath": "_content/EvlyCorpBackend.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
