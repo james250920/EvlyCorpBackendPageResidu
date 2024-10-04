@@ -18,22 +18,25 @@ namespace EvlyCorpBackend.CORE.SERVICES
         }
         public async Task<IEnumerable<WastesListDTO>> GetAll()
         {
-            var wastes = await _wastesRepository.GetAll();
+            var wastes = await _wastesRepository.GetAll();          
             var mastesDTO = wastes.Select(wastes => new WastesListDTO
             {
                 Id = wastes.Id,
                 Name = wastes.Name,
                 Price = wastes.Price,
                 MeasurementUnit = wastes.MeasurementUnit
-
-
             });
             return mastesDTO;
         }
+
         public async Task<WastesDTO> GetById(int id)
         {
             var wastes = await _wastesRepository.GetById(id);
-            var wastesDTO = new WastesDTO
+            if(wastes == null)
+            {
+                return null;
+            }
+            var wasteDTO = new WastesDTO
             {
                 Id = wastes.Id,
                 Name = wastes.Name,
@@ -41,35 +44,49 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 MeasurementUnit = wastes.MeasurementUnit,
                 CreatedAt = wastes.CreatedAt,
                 UpdatedAt = wastes.UpdatedAt
+
             };
-            return wastesDTO;
+            return wasteDTO;
+
         }
         public async Task<bool> Insert(WastesInsertDTO wastesInsertDTO)
         {
-            var wastes = new Wastes()
-            {
-                Name = wastesInsertDTO.Name,
-                Price = wastesInsertDTO.Price,
-                MeasurementUnit = wastesInsertDTO.MeasurementUnit,
-                CreatedAt = DateTime.Now
-            };
-            return await _wastesRepository.Insert(wastes);
+            var wastes = new Wastes();
+            wastes.Name = wastesInsertDTO.Name;
+            wastes.Price = wastesInsertDTO.Price;
+            wastes.MeasurementUnit = wastesInsertDTO.MeasurementUnit;
+            wastes.CreatedAt = DateTime.Now;
+            
+            var result = await _wastesRepository.Insert(wastes);
+            return result;
+            
         }
         public async Task<bool> Update(WastesUpdateDTO wastesUpdateDTO)
         {
-            var wastes = new Wastes()
+            var wastes = await _wastesRepository.GetById(wastesUpdateDTO.Id);
+            if (wastes == null)
             {
-                Id = wastesUpdateDTO.Id,
-                Name = wastesUpdateDTO.Name,
-                Price = wastesUpdateDTO.Price,
-                MeasurementUnit = wastesUpdateDTO.MeasurementUnit,
-                UpdatedAt = DateTime.Now
-            };
-            return await _wastesRepository.Update(wastes);
+                return false;
+            }
+            wastes.Name = wastesUpdateDTO.Name;
+            wastes.Price = wastesUpdateDTO.Price;
+            wastes.MeasurementUnit = wastesUpdateDTO.MeasurementUnit;
+            wastes.UpdatedAt = DateTime.Now;
+            
+            var result = await _wastesRepository.Update(wastes);
+            return result;
         }
+
         public async Task<bool> Delete(WastesDeleteDTO wastesDeleteDTO)
         {
-            return await _wastesRepository.Delete(wastesDeleteDTO.Id);
+            var wastes = await _wastesRepository.GetById(wastesDeleteDTO.Id);
+            if (wastes == null)
+            {
+                return false;
+            }
+            var result = await _wastesRepository.Delete(wastesDeleteDTO.Id);
+            return result;
+           
         }
         //relacion con los condominiosWastes
         //realacon con los Orders

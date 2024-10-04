@@ -43,26 +43,7 @@ namespace EvlyCorpBackend.CORE.DTOs
     {
         public int Id { get; set; }
     }
-    public class WastesWithCondominiumsWastesDTO
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public decimal Price { get; set; }
-        public string MeasurementUnit { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        //public List<CondominiumWastesListDTO> CondominiumWastes { get; set; }
-    }
-    public class WastesWithOrdersDTO
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public decimal Price { get; set; }
-        public string MeasurementUnit { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        //public List<OrdersListDTO> Orders { get; set; }
-    }
+
 
 
 }

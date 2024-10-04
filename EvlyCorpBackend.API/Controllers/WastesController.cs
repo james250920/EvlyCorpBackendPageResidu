@@ -19,18 +19,17 @@ namespace EvlyCorpBackend.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var wastes = await _wastesService.GetAll();
-            if(wastes == null)
-            {
-                return NotFound();
-            }
-
             return Ok(wastes);
-
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var wastes = await _wastesService.GetById(id);
+            if (wastes == null)
+            {
+                return NotFound();
+            }
             return Ok(wastes);
         }
         [HttpPost]
@@ -41,11 +40,15 @@ namespace EvlyCorpBackend.API.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return NoContent();
         }
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody]  WastesUpdateDTO wastesUpdateDTO)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id,[FromBody]  WastesUpdateDTO wastesUpdateDTO)
         {
+            if (id != wastesUpdateDTO.Id)
+            {
+                return NotFound();
+            }
             var result = await _wastesService.Update(wastesUpdateDTO);
             if (result)
             {

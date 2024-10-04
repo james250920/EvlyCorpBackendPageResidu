@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <Folder Include="MAPPINGS\" />
-    <Folder Include="SHARED\" />
     <Folder Include="Data\" />
     <Folder Include="IDENTITY\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Hangfire.PostgreSql" Version="1.20.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>

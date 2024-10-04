@@ -26,6 +26,8 @@ builder.Services.AddTransient<IDistrictsService, DistrictsService>();
 builder.Services.AddTransient<IDistrictsRepository, DistrictsRepository>();
 builder.Services.AddTransient<IWastesService, WastesService>();
 builder.Services.AddTransient<IWastesRepository, WastesRepository>();
+builder.Services.AddTransient<IManagementCompanyService, ManagementCompanyService>();
+builder.Services.AddTransient<IManagementCompanyRepository, ManagementCompanyRepository>();
 
 
 

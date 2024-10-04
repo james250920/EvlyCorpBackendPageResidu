@@ -18,19 +18,6 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
             _context = context;
         }
 
-        public async Task<IEnumerable<Wastes>> GetAll()
-        {
-            return await _context.Wastes.
-                Include(x => x.CondominiumWastes).
-                ThenInclude(x => x.Orders).ToListAsync();
-        }
-        public async Task<Wastes> GetById(int id)
-        {
-            return await _context.Wastes.
-                Include(y => y.CondominiumWastes).
-                ThenInclude(r => r.Orders).FirstOrDefaultAsync(x => x.Id == id);
-        }
-
         public async Task<bool> Insert(Wastes wastes)
         {
             await _context.Wastes.AddAsync(wastes);
@@ -47,12 +34,27 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
        
         public async Task<bool> Delete(int id)
         {
-            var wastes = await GetById(id);
+            var wastes = await _context.Wastes.FindAsync(id);
+            if (wastes == null)
+            {
+                return false;
+            }
             _context.Wastes.Remove(wastes);
             int rows = await _context.SaveChangesAsync();
             return rows > 0;
+
         }
-      
-        
+
+        public async Task<IEnumerable<Wastes>> GetAll()
+        {
+            return await _context.Wastes.ToListAsync();
+        }
+        public async Task<Wastes> GetById(int id)
+        {
+            return await _context.Wastes.Where(x => x.Id == id).FirstOrDefaultAsync();
+       
+        }
+
+
     }
 }
