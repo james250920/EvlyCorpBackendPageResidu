@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
+      "projectUniqueName": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
       "projectName": "EvlyCorpBackend.CORE",
-      "projectPath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
+      "projectPath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
       "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.CORE\\obj\\",
+      "outputPath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.CORE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,12 @@
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\bin\Debug\net8.0\EvlyCorpBackend.CORE.deps.json
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\bin\Debug\net8.0\EvlyCorpBackend.CORE.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\bin\Debug\net8.0\EvlyCorpBackend.CORE.pdb
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.AssemblyInfoInputs.cache
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.AssemblyInfo.cs
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.csproj.CoreCompileInputs.cache
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.sourcelink.json
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\refint\EvlyCorpBackend.CORE.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\EvlyCorpBackend.CORE.pdb
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.CORE\obj\Debug\net8.0\ref\EvlyCorpBackend.CORE.dll
