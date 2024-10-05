@@ -95,3 +95,11 @@ C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\Ev
 C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\EvlyCorpBackend.INFRASTRUCTURE.dll
 C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\EvlyCorpBackend.INFRASTRUCTURE.pdb
 C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\EvlyCorpBackend.CORE.pdb
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Proyectos\Evly\BackendResidu\EvlyCorpBackend.API\EvlyCorpBackendPageResidu\EvlyCorpBackend.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

@@ -2,6 +2,7 @@ using EvlyCorpBackend.CORE.INTERFACES;
 using EvlyCorpBackend.CORE.SERVICES;
 using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
+using EvlyCorpBackend.INFRASTRUCTURE.SHARED;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,10 @@ builder.Services.AddTransient<IWastesService, WastesService>();
 builder.Services.AddTransient<IWastesRepository, WastesRepository>();
 builder.Services.AddTransient<IManagementCompanyService, ManagementCompanyService>();
 builder.Services.AddTransient<IManagementCompanyRepository, ManagementCompanyRepository>();
+builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+builder.Services.AddTransient<IJWTService, JWTService>();
+
 
 
 
@@ -35,6 +40,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 

@@ -9,6 +9,7 @@ public partial class Condominiums
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
+    public string? status { get; set; }
 
     public string? PostalCode { get; set; }
 
@@ -23,8 +24,6 @@ public partial class Condominiums
     public int UnitsPerCondominium { get; set; }
 
     public DateTime? IncorporationDate { get; set; }
-
-    public string? BoardMembers { get; set; }
 
     public string? Address { get; set; }
 

@@ -13,6 +13,7 @@ public partial class CondominiumWastes
     public DateTime UpdatedAt { get; set; }
 
     public int WasteId { get; set; }
+    public string status { get; set; }
 
     public int CondominiumId { get; set; }
 

@@ -15,6 +15,7 @@ public partial class Orders
     public int CondominiumWasteId { get; set; }
 
     public int WasteId { get; set; }
+    public string Status { get; set; } = null!;
 
     public virtual CondominiumWastes CondominiumWaste { get; set; } = null!;
 
