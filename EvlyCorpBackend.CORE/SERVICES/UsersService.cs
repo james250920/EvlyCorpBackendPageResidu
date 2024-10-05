@@ -47,13 +47,19 @@ namespace EvlyCorpBackend.CORE.SERVICES
         }
         public async Task<UsersAuthenticationsDTO> Login(UsersLoginDTO usersLoginDTO)
         {
+            // Obtener el usuario con las credenciales proporcionadas
             var user = await _usersRepository.GetUserCredentials(usersLoginDTO.Email, usersLoginDTO.Password);
+
+            // Si el usuario no existe, devolver null
             if (user == null)
             {
-                return null;
+                return null; // Esto es manejado en el controlador
             }
 
+            // Generar el token JWT
             var token = _jwtService.GenerateJWToken(user);
+
+            // Crear el DTO de autenticación
             var userAuth = new UsersAuthenticationsDTO
             {
                 Id = user.Id,
@@ -68,8 +74,8 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 DepartmentId = user.DepartmentId,
                 Token = token
             };
-            return userAuth;
 
+            return userAuth;
         }
         public async Task<IEnumerable<UsersDepartmentsDTO>> GetAll()
         {

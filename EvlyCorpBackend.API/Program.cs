@@ -1,5 +1,6 @@
 using EvlyCorpBackend.CORE.INTERFACES;
 using EvlyCorpBackend.CORE.SERVICES;
+using EvlyCorpBackend.CORE.SETTINGS;
 using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
 using EvlyCorpBackend.INFRASTRUCTURE.SHARED;
@@ -14,8 +15,10 @@ var _connectionString = _config.GetConnectionString("DevConnection");
 builder.Services.AddDbContext<ResiduContext>(options =>
 {
     options.UseNpgsql(_connectionString);
-
 });
+
+// Configuración de JWTSettings desde el archivo appsettings.json
+builder.Services.Configure<JWTSettings>(_config.GetSection("JWTSettings"));
 
 builder.Services.AddTransient<ImunicipalitiesService, MunicipalitiesService>();
 builder.Services.AddTransient<ImunicipalitiesRepository, MunicipalitiesRepository>();
@@ -31,17 +34,14 @@ builder.Services.AddTransient<IManagementCompanyService, ManagementCompanyServic
 builder.Services.AddTransient<IManagementCompanyRepository, ManagementCompanyRepository>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+
+// Inyección del servicio JWT
 builder.Services.AddTransient<IJWTService, JWTService>();
-
-
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 var app = builder.Build();
 
