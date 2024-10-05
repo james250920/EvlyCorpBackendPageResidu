@@ -33,13 +33,18 @@ namespace EvlyCorpBackend.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UsersLoginDTO usersLoginDTO)
         {
-            if(usersLoginDTO.Email.IsNullOrEmpty() || usersLoginDTO.Password.IsNullOrEmpty())
-                return BadRequest("Email and password are required");
+            // Validar que el email y la contraseña no sean nulos o vacíos
+            if (string.IsNullOrEmpty(usersLoginDTO.Email) || string.IsNullOrEmpty(usersLoginDTO.Password))
+                return BadRequest(new { message = "Email and password are required." });
 
+            // Llamar al servicio para autenticar al usuario
             var user = await _usersService.Login(usersLoginDTO);
-            if (user == null)
-                return BadRequest("Invalid credentials");
 
+            // Verificar si el usuario fue encontrado
+            if (user == null)
+                return Unauthorized(new { message = "Invalid credentials." });
+
+            // Retornar el objeto de usuario autenticado
             return Ok(user);
         }
         [HttpGet]
