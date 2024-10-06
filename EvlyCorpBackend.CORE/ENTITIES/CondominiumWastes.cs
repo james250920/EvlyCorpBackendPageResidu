@@ -1,10 +1,16 @@
-﻿namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using System;
+using System.Collections.Generic;
+
+
+namespace infrastructure.DATA;
 
 public partial class CondominiumWastes
 {
     public int Id { get; set; }
 
     public decimal Weight { get; set; }
+
+    public string Status { get; set; } = null!;
 
     public bool FreeCollection { get; set; }
 
@@ -13,7 +19,6 @@ public partial class CondominiumWastes
     public DateTime UpdatedAt { get; set; }
 
     public int WasteId { get; set; }
-    public string status { get; set; }
 
     public int CondominiumId { get; set; }
 

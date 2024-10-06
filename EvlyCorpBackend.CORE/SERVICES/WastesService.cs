@@ -1,6 +1,7 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,7 +89,6 @@ namespace EvlyCorpBackend.CORE.SERVICES
             return result;
            
         }
-        //relacion con los condominiosWastes
-        //realacon con los Orders
+ 
     }
 }

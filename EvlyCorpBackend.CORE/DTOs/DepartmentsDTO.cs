@@ -1,32 +1,28 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EvlyCorpBackend.CORE.DTOs
+﻿namespace EvlyCorpBackend.CORE.DTOs
 {
     public class DepartmentsDTO
     {
         public int Id { get; set; }
+
         public string Name { get; set; } = null!;
+
         public DateTime CreatedAt { get; set; }
+
         public DateTime UpdatedAt { get; set; }
-        public int? ProvinceId { get; set; }
 
     }
     public class DepartmentsListDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public int? ProvinceId { get; set; }
+        
     }
     public class DepartmentsInsertDTO
     {
         public string Name { get; set; } = null!;
-        public int? ProvinceId { get; set; }
-        public DateTime CreatedAt { get; set;}
+        public DateTime CreatedAt { get; set; }
+
+    
     }
     public class DepartmentsUpdateDTO
     {
@@ -39,16 +35,7 @@ namespace EvlyCorpBackend.CORE.DTOs
     {
         public int Id { get; set; }
     }
-    public class DepartmentsProvincesDTO
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public ProvincesListDTO Province { get; set; } = null!;
-
-
-    }
+   
 }
 
 

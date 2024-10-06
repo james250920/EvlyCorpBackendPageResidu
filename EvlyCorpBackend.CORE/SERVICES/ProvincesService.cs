@@ -1,7 +1,7 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,20 @@ namespace EvlyCorpBackend.CORE.SERVICES
         {
             _provincesRepository = provincesRepository;
         }
-        public async Task<IEnumerable<ProvincesListDTO>> GetAll()
+        public async Task<IEnumerable<ProvincesDepartmentsDTO>> GetAll()
         {
             var provinces = await _provincesRepository.GetAll();
-            var ProvincesDTO = provinces.Select(provinces => new ProvincesListDTO
+            var ProvincesDTO = provinces.Select(provinces => new ProvincesDepartmentsDTO
             {
                 Id = provinces.Id,
-                Name = provinces.Name
+                Name = provinces.Name,
+                Department = new DepartmentsListDTO
+                {
+                    Id = provinces.Department.Id,
+                    Name = provinces.Department.Name,
+
+                }
+
             });
             return ProvincesDTO;
         }
@@ -31,6 +38,9 @@ namespace EvlyCorpBackend.CORE.SERVICES
         {
             var province = new Provinces();
             province.Name = provincesInsertDTO.Name;
+            province.CreatedAt = provincesInsertDTO.CreatedAt;
+            province.DepartmentId = provincesInsertDTO.DepartmentId;
+
             var result = await _provincesRepository.Insert(province);
             return result;
         }
@@ -42,6 +52,9 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 return false;
             }
             province.Name = provincesUpdateDTO.Name;
+            province.UpdatedAt = provincesUpdateDTO.UpdatedAt;
+            province.DepartmentId = provincesUpdateDTO.DepartmentId;
+
             var result = await _provincesRepository.Update(province);
             return result;
         }
@@ -50,17 +63,22 @@ namespace EvlyCorpBackend.CORE.SERVICES
             var result = await _provincesRepository.Delete(provincesDeleteDTO.Id);
             return result;
         }
-        public async Task<ProvincesDTO> GetById(int id)
+        public async Task<ProvincesDepartmentsDTO> GetById(int id)
         {
             var province = await _provincesRepository.GetById(id);
             if (province == null)
             {
                 return null;
             }
-            var ProvincesDTO = new ProvincesDTO
+            var ProvincesDTO = new ProvincesDepartmentsDTO
             {
                 Id = province.Id,
-                Name = province.Name
+                Name = province.Name,
+                Department = new DepartmentsListDTO
+                {
+                    Id = province.Department.Id,
+                    Name = province.Department.Name,
+                }
             };
             return ProvincesDTO;
         }

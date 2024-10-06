@@ -1,5 +1,6 @@
 ﻿using EvlyCorpBackend.CORE.SETTINGS;
 using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using infrastructure.DATA;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -35,7 +36,7 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.SHARED
                 new Claim(ClaimTypes.MobilePhone, user.Phone),
                 new Claim("PhotoUrl", user.PhotoUrl ?? string.Empty),
                 new Claim(ClaimTypes.StreetAddress, user.Address ?? string.Empty),
-                new Claim(ClaimTypes.Country, user.DepartmentId.ToString()),
+                new Claim(ClaimTypes.Country, user.DistrictId.ToString()),
                 new Claim(ClaimTypes.Role, user.Role ?? string.Empty)
             };
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TV1Ndk8x4exGXblEhXWTqVKZfiCQQhwHpGga2kh5v70MhaQSS89d9JRKbS91NUFTkuhDLeNf17H8gTKy7ndQTg==",
+  "dgSpecHash": "7h/oovKXDvtGQF0Ntd12bNMr0LC801R+g4cIt8jlJIiJ/cnpe54JVrF5u76gIWsK7+qQFItvaAv/6MX2ce1+Zw==",
   "success": true,
-  "projectFilePath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
+  "projectFilePath": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.CORE\\EvlyCorpBackend.CORE.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

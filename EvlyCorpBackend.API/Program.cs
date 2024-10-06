@@ -21,7 +21,7 @@ builder.Services.AddDbContext<ResiduContext>(options =>
 builder.Services.Configure<JWTSettings>(_config.GetSection("JWTSettings"));
 
 builder.Services.AddTransient<ImunicipalitiesService, MunicipalitiesService>();
-builder.Services.AddTransient<ImunicipalitiesRepository, MunicipalitiesRepository>();
+builder.Services.AddTransient<IMunicipalitiesRepository, MunicipalitiesRepository>();
 builder.Services.AddTransient<IProvincesService, ProvincesService>();
 builder.Services.AddTransient<IProvincesRepository, ProvincesRepository>();
 builder.Services.AddTransient<IDepartmentsService, DepartmentsService>();
@@ -34,6 +34,12 @@ builder.Services.AddTransient<IManagementCompanyService, ManagementCompanyServic
 builder.Services.AddTransient<IManagementCompanyRepository, ManagementCompanyRepository>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+builder.Services.AddTransient<ICondominiumsService, CondominiumsService>();
+builder.Services.AddTransient<ICondominiumsRepository, CondominiumsRepository>();
+builder.Services.AddTransient<ICondominiumWastesService, CondominiumWastesService>();
+builder.Services.AddTransient<ICondominiumWastesRepository, CondominiumWastesRepository>();
+builder.Services.AddTransient<IOrdersService, OrdersService>();
+builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
 
 // Inyección del servicio JWT
 builder.Services.AddTransient<IJWTService, JWTService>();

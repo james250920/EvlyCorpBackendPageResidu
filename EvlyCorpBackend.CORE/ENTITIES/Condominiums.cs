@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Condominiums
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
-    public string? status { get; set; }
+
+    public string Status { get; set; } = null!;
 
     public string? PostalCode { get; set; }
 

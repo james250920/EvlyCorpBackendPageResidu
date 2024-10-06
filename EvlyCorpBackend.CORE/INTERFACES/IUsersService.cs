@@ -1,11 +1,12 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 
-namespace EvlyCorpBackend.CORE.INTERFACES
+namespace EvlyCorpBackend.CORE.SERVICES
 {
     public interface IUsersService
     {
-        Task<IEnumerable<UsersDepartmentsDTO>> GetAll();
-        Task<UsersDepartmentsDTO> GetById(int id);
+        Task<bool> Delete(UsersDeleteDTO usersDeleteDTO);
+        Task<IEnumerable<UsersListDTO>> GetAll();
+        Task<UsersListDTO> GetById(UsersListDTO usersDTO);
         Task<UsersAuthenticationsDTO> Login(UsersLoginDTO usersLoginDTO);
         Task<bool> Register(UsersInsertDTO usersInsertDTO);
         Task<bool> Update(UsersUpdateDTO usersUpdateDTO);

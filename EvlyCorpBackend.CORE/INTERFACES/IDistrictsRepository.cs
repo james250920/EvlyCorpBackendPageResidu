@@ -1,13 +1,13 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using infrastructure.DATA;
 
 namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 {
     public interface IDistrictsRepository
     {
         Task<bool> Delete(int id);
-        Task<IEnumerable<DistrictsUpdatetDTO>> GetAll();
-        Task<DistrictsUpdatetDTO> GetById(int id);
-        Task<bool> Insert(DistrictsUpdatetDTO district);
-        Task<bool> Update(DistrictsUpdatetDTO district);
+        Task<IEnumerable<Districts>> GetAll();
+        Task<Districts> GetById(int id);
+        Task<bool> Insert(Districts district);
+        Task<bool> Update(Districts district);
     }
 }
