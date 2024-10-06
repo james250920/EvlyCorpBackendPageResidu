@@ -1,4 +1,5 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,42 @@ namespace EvlyCorpBackend.CORE.DTOs
     public class DistrictsDTO
     {
         public int Id { get; set; }
+
         public string Name { get; set; } = null!;
+
         public int ProvinceId { get; set; }
-        public int? DepartmentId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+
+     
     }
     public class DistrictsInsertDTO
     {
+
         public string Name { get; set; } = null!;
+
         public int ProvinceId { get; set; }
-        public int? DepartmentId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
     }
     public class DistrictsUpdateDTO
     {
         public int Id { get; set; }
+
         public string Name { get; set; } = null!;
+
         public int ProvinceId { get; set; }
-        public int? DepartmentId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+  
+
     }
     public class DistrictsDeleteDTO
     {
@@ -34,8 +55,10 @@ namespace EvlyCorpBackend.CORE.DTOs
     public class DistrictsListDTO 
     {
         public int Id { get; set; }
+
         public string Name { get; set; } = null!;
-        public virtual DepartmentsProvincesDTO Department { get; set; }
+
+        public ProvincesDepartmentsDTO  Province { get; set; } = null!;
 
 
     }

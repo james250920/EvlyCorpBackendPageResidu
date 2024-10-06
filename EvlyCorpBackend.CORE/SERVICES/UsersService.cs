@@ -1,11 +1,12 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
 using EvlyCorpBackend.INFRASTRUCTURE.SHARED;
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 PhotoUrl = usersInsertDTO.PhotoUrl,
                 Email = usersInsertDTO.Email,
                 Address = usersInsertDTO.Address,
-                DepartmentId = usersInsertDTO.DepartmentId,
+                DistrictId = usersInsertDTO.DistrictId,
                 Password = usersInsertDTO.Password,
                 Role = usersInsertDTO.Role,
                 CreatedAt = DateTime.Now
@@ -47,20 +48,14 @@ namespace EvlyCorpBackend.CORE.SERVICES
         }
         public async Task<UsersAuthenticationsDTO> Login(UsersLoginDTO usersLoginDTO)
         {
-            // Obtener el usuario con las credenciales proporcionadas
             var user = await _usersRepository.GetUserCredentials(usersLoginDTO.Email, usersLoginDTO.Password);
-
-            // Si el usuario no existe, devolver null
             if (user == null)
             {
-                return null; // Esto es manejado en el controlador
+                return null;
             }
 
-            // Generar el token JWT
             var token = _jwtService.GenerateJWToken(user);
-
-            // Crear el DTO de autenticación
-            var userAuth = new UsersAuthenticationsDTO
+            var userDTO = new UsersAuthenticationsDTO
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
@@ -71,90 +66,115 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 PhotoUrl = user.PhotoUrl,
                 Email = user.Email,
                 Address = user.Address,
-                DepartmentId = user.DepartmentId,
+                DistrictId = user.DistrictId,
+                Role = user.Role,
                 Token = token
-            };
-
-            return userAuth;
-        }
-        public async Task<IEnumerable<UsersDepartmentsDTO>> GetAll()
-        {
-            var users = await _usersRepository.GetAll();
-            var usersDTO = users.Select(u => new UsersDepartmentsDTO
-            {
-                Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Document = u.Document,
-                DocumentType = u.DocumentType,
-                Phone = u.Phone,
-                PhotoUrl = u.PhotoUrl,
-                Email = u.Email,
-                Address = u.Address,
-                DepartmentId = u.DepartmentId,
-                CreatedAt = u.CreatedAt,
-                UpdatedAt = u.UpdatedAt,
-                Department = new DepartmentsListDTO()
-                {
-                    Id = u.Department.Id,
-                    Name = u.Department.Name,
-                    ProvinceId = u.Department.ProvinceId
-                }
-            });
-            return usersDTO;
-        }
-        public async Task<UsersDepartmentsDTO> GetById(int id)
-        {
-            var user = await _usersRepository.GetById(id);
-            var userDTO = new UsersDepartmentsDTO
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Document = user.Document,
-                DocumentType = user.DocumentType,
-                Phone = user.Phone,
-                PhotoUrl = user.PhotoUrl,
-                Email = user.Email,
-                Address = user.Address,
-                DepartmentId = user.DepartmentId,
-                CreatedAt = user.CreatedAt,
-
-                UpdatedAt = user.UpdatedAt,
-                Department = new DepartmentsListDTO()
-                {
-                    Id = user.Department.Id,
-                    Name = user.Department.Name,
-                    ProvinceId = user.Department.ProvinceId
-                }
             };
             return userDTO;
         }
         public async Task<bool> Update(UsersUpdateDTO usersUpdateDTO)
         {
-            var user = await _usersRepository.GetById(usersUpdateDTO.Id);
+            var user = new Users
+            {
+                Id = usersUpdateDTO.Id,
+                FirstName = usersUpdateDTO.FirstName,
+                LastName = usersUpdateDTO.LastName,
+                Document = usersUpdateDTO.Document,
+                DocumentType = usersUpdateDTO.DocumentType,
+                Phone = usersUpdateDTO.Phone,
+                PhotoUrl = usersUpdateDTO.PhotoUrl,
+                Email = usersUpdateDTO.Email,
+                Address = usersUpdateDTO.Address,
+                DistrictId = usersUpdateDTO.DistrictId,
+                Role = usersUpdateDTO.Role,
+                Password = usersUpdateDTO.Password,
+                UpdatedAt = DateTime.Now
+            };
+            return await _usersRepository.Update(user);
+        }
+        public async Task<bool> Delete(UsersDeleteDTO usersDeleteDTO)
+        {
+            return await _usersRepository.Delete(usersDeleteDTO.Id);
+        }
+        public async Task<UsersListDTO> GetById(UsersListDTO usersDTO)
+        {
+            var user = await _usersRepository.GetById(usersDTO.Id);
             if (user == null)
             {
-                return false;
+                return null;
             }
+            var userDTO = new UsersListDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Document = user.Document,
+                Phone = user.Phone,
+                PhotoUrl = user.PhotoUrl,
+                Email = user.Email,
+                Address = user.Address,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                District = new DistrictsListDTO
+                {
+                    Id = user.District.Id,
+                    Name = user.District.Name,
+                    Province = new ProvincesDepartmentsDTO
+                    {
+                        Id = user.District.Province.Id,
+                        Name = user.District.Province.Name,
+                        Department = new DepartmentsListDTO
+                        {
+                            Id = user.District.Province.Department.Id,
+                            Name = user.District.Province.Department.Name,
 
-            user.FirstName = usersUpdateDTO.FirstName;
-            user.LastName = usersUpdateDTO.LastName;
-            user.Document = usersUpdateDTO.Document;
-            user.DocumentType = usersUpdateDTO.DocumentType;
-            user.Phone = usersUpdateDTO.Phone;
-            user.PhotoUrl = usersUpdateDTO.PhotoUrl;
-            user.Email = usersUpdateDTO.Email;
-            user.Address = usersUpdateDTO.Address;
-            user.DepartmentId = usersUpdateDTO.DepartmentId;
-            user.Password = usersUpdateDTO.Password;
-            user.UpdatedAt = DateTime.Now;
-            var result = await _usersRepository.Update(user);
-            return result;
-
-
+                        }
+                    }
+                }
+            };
+            return userDTO;
         }
+        public async Task<IEnumerable<UsersListDTO>> GetAll()
+        {
+            var users = await _usersRepository.GetAll();
 
+            return users.Select(user => new UsersListDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Document = user.Document,
+                Phone = user.Phone,
+                PhotoUrl = user.PhotoUrl,
+                Email = user.Email,
+                Address = user.Address,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                
+                District = user.District != null ? new DistrictsListDTO
+                {
+                    Id = user.District.Id,
+                    Name = user.District.Name,
+                    Province = user.District.Province != null ? new ProvincesDepartmentsDTO
+                    {
+                        Id = user.District.Province.Id,
+                        Name = user.District.Province.Name,
+                        Department = user.District.Province.Department != null ? new DepartmentsListDTO
+                        {
+                            Id = user.District.Province.Department.Id,
+                            Name = user.District.Province.Department.Name,
+                        } : null 
+                    } : null  
+                } : null  
+            }).ToList();  
+        }
 
     }
 }
+
+       
+
+            
+
+
+ 

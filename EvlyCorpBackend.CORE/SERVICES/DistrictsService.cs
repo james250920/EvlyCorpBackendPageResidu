@@ -1,7 +1,8 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.INFRASTRUCTURE.Data;
+
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,65 +21,83 @@ namespace EvlyCorpBackend.CORE.SERVICES
         public async Task<IEnumerable<DistrictsListDTO>> GetAll()
         {
             var districts = await _districtsRepository.GetAll();
-            var districtsDTO = districts.Select(x => new DistrictsListDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Department = new DepartmentsProvincesDTO
-                {
-                    Id = x.Department.Id,
-                    Name = x.Department.Name,
-                    Province = new ProvincesListDTO
-                    {
-                        Id = x.Department.Province.Id,
-                        Name = x.Department.Province.Name
-                    }
-                },
 
-            }).ToList();
-            return districtsDTO;
+            var districtDTO = districts
+                .Where(d => d != null)
+                .Select(district => new DistrictsListDTO
+                {
+                    Id = district.Id,
+                    Name = district.Name,
+                    Province = district.Province != null ? new ProvincesDepartmentsDTO
+                    {
+                        Id = district.Province?.Id ?? 0,
+                        Name = district.Province?.Name ?? string.Empty,
+                        Department = district.Province.Department != null ? new DepartmentsListDTO
+                        {
+                            Id = district.Province.Department?.Id ?? 0,
+                            Name = district.Province.Department?.Name ?? string.Empty 
+                        } : null 
+                    } : null 
+                })
+                .ToList();
+
+            return districtDTO;
         }
+
         public async Task<DistrictsListDTO> GetById(int id)
         {
             var district = await _districtsRepository.GetById(id);
-            var districtsDTO = new DistrictsListDTO
+
+    
+            if (district == null)
+            {
+                return null; 
+            }
+
+            return new DistrictsListDTO
             {
                 Id = district.Id,
                 Name = district.Name,
-                Department = new DepartmentsProvincesDTO
-                {
-                    Id = district.Department.Id,
-                    Name = district.Department.Name,
-                    Province = new ProvincesListDTO
-                    {
-                        Id = district.Department.Province.Id,
-                        Name = district.Department.Province.Name
-                    }
-                }
 
+                Province = district.Province != null ? new ProvincesDepartmentsDTO
+                {
+                    Id = district.Province.Id,
+                    Name = district.Province.Name,
+
+                    Department = district.Province.Department != null ? new DepartmentsListDTO
+                    {
+                        Id = district.Province.Department.Id,
+                        Name = district.Province.Department.Name
+                    } : null 
+
+                } : null 
             };
-            return districtsDTO;
         }
+
         public async Task<bool> Insert(DistrictsInsertDTO district)
         {
-            var districtEntity = new DistrictsUpdatetDTO
-            {
-                Name = district.Name,
-                ProvinceId = district.ProvinceId,
-                DepartmentId = district.DepartmentId
-            };
-            return await _districtsRepository.Insert(districtEntity);
+            var districtEntity = new Districts();
+            districtEntity.Name = district.Name;
+            districtEntity.CreatedAt = district.CreatedAt;
+            districtEntity.ProvinceId = district.ProvinceId;
+ 
+            var result = await _districtsRepository.Insert(districtEntity);
+            return result;
         }
         public async Task<bool> Update(DistrictsUpdateDTO district)
         {
-            var districtEntity = new DistrictsUpdatetDTO
+            var districtEntity = await _districtsRepository.GetById(district.Id);
+            if (districtEntity == null)
             {
-                Id = district.Id,
-                Name = district.Name,
-                ProvinceId = district.ProvinceId,
-                DepartmentId = district.DepartmentId
-            };
-            return await _districtsRepository.Update(districtEntity);
+                return false;
+            }
+
+            districtEntity.Name = district.Name;
+            districtEntity.UpdatedAt = district.UpdatedAt;
+            districtEntity.ProvinceId = district.ProvinceId;
+
+            var result = await _districtsRepository.Update(districtEntity);
+            return result;
         }
         public async Task<bool> Delete(DistrictsDeleteDTO district)
         {

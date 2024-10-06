@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ga35ZMPBHZP4fmdn2HVzVqCI/FRcmTLhpaRrjjKpJx/hx55wVDUf4AWvDjH4hQFSWfu0KjI6ugA46ozADSy8+Q==",
+  "dgSpecHash": "21CDW8wpQql7Kvpq0c9UBM4yi0/r5ekpCPXS/etKB2CC+TPPS5Yo+yv6erk1jFjNPitRxP/RhzuExG9mY9VFDw==",
   "success": true,
-  "projectFilePath": "C:\\Proyectos\\Evly\\BackendResidu\\EvlyCorpBackend.API\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.API.csproj",
+  "projectFilePath": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\james\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\james\\.nuget\\packages\\hangfire.core\\1.8.0\\hangfire.core.1.8.0.nupkg.sha512",

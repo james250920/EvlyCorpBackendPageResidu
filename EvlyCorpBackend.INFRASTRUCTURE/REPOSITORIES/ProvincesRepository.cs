@@ -1,4 +1,5 @@
 ﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using infrastructure.DATA;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,11 +42,11 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         }
         public async Task<IEnumerable<Provinces>> GetAll()
         {
-            return await _context.Provinces.ToListAsync();
+            return await _context.Provinces.Include(x => x.Department).ToListAsync();
         }
         public async Task<Provinces> GetById(int id)
         {
-            return await _context.Provinces.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _context.Provinces.Where(x => x.Id == id).Include(X => X.Department).FirstOrDefaultAsync();
         }
     }
 }

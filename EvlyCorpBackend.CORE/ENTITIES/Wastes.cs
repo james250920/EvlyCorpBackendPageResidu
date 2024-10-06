@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Wastes
 {

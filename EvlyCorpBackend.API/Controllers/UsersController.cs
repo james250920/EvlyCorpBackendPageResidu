@@ -1,5 +1,6 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
+using EvlyCorpBackend.CORE.SERVICES;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -30,21 +31,18 @@ namespace EvlyCorpBackend.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("login")]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login([FromBody] UsersLoginDTO usersLoginDTO)
         {
-            // Validar que el email y la contraseña no sean nulos o vacíos
+
             if (string.IsNullOrEmpty(usersLoginDTO.Email) || string.IsNullOrEmpty(usersLoginDTO.Password))
                 return BadRequest(new { message = "Email and password are required." });
 
-            // Llamar al servicio para autenticar al usuario
             var user = await _usersService.Login(usersLoginDTO);
 
-            // Verificar si el usuario fue encontrado
             if (user == null)
                 return Unauthorized(new { message = "Invalid credentials." });
 
-            // Retornar el objeto de usuario autenticado
             return Ok(user);
         }
         [HttpGet]
@@ -58,7 +56,7 @@ namespace EvlyCorpBackend.API.Controllers
             return Ok(users);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(UsersListDTO id)
         {
             var user = await _usersService.GetById(id);
             if (user == null)
@@ -66,7 +64,8 @@ namespace EvlyCorpBackend.API.Controllers
                 return NotFound();
             }
             return Ok(user);
-        }
+        }   
+
 
     }
 }

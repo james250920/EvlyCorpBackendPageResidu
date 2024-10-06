@@ -70,20 +70,5 @@ namespace EvlyCorpBackend.CORE.DTOs
     {
         public int Id { get; set; }
     }
-    public class MunicipalitiesCondominiumsDTO
-    {
-        public int Id { get; set; }
-
-        public string Name { get; set; } = null!;
-
-        public string? Address { get; set; }
-
-        public string? LogoUrl { get; set; }
-
-        public string? Phone { get; set; }
-
-        public string? Email { get; set; }
-
-        //public ICollection<CondominiumsListDTO> Condominiums { get; set; }
-    }
+    
 }
