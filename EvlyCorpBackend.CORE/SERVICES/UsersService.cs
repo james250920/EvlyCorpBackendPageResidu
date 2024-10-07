@@ -96,13 +96,17 @@ namespace EvlyCorpBackend.CORE.SERVICES
         {
             return await _usersRepository.Delete(usersDeleteDTO.Id);
         }
-        public async Task<UsersListDTO> GetById(UsersListDTO usersDTO)
+
+        public async Task<UsersListDTO> GetById(int usersDTO)
         {
-            var user = await _usersRepository.GetById(usersDTO.Id);
+            var user = await _usersRepository.GetById(usersDTO);
+
             if (user == null)
             {
-                return null;
+                // Manejo del caso en que el usuario no es encontrado
+                throw new ArgumentNullException(nameof(user), "User not found.");
             }
+
             var userDTO = new UsersListDTO
             {
                 Id = user.Id,
@@ -115,25 +119,31 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 Address = user.Address,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt,
-                District = new DistrictsListDTO
+                District = user.District != null ? new DistrictsListDTO
                 {
                     Id = user.District.Id,
                     Name = user.District.Name,
-                    Province = new ProvincesDepartmentsDTO
+                    Province = user.District.Province != null ? new ProvincesDepartmentsDTO
                     {
                         Id = user.District.Province.Id,
                         Name = user.District.Province.Name,
-                        Department = new DepartmentsListDTO
+                        Department = user.District.Province.Department != null ? new DepartmentsListDTO
                         {
                             Id = user.District.Province.Department.Id,
                             Name = user.District.Province.Department.Name,
-
-                        }
-                    }
-                }
+                        } : null
+                    } : null
+                } : null
             };
+
             return userDTO;
         }
+
+
+
+
+
+
         public async Task<IEnumerable<UsersListDTO>> GetAll()
         {
             var users = await _usersRepository.GetAll();
@@ -169,6 +179,11 @@ namespace EvlyCorpBackend.CORE.SERVICES
             }).ToList();  
         }
 
+        public async Task UpdatePartialAsync(int userId, UserUpdateProfileDTO userUpdateDto)
+        {
+            await _usersRepository.UpdatePartialAsync(userId, userUpdateDto);
+        }
+        
     }
 }
 

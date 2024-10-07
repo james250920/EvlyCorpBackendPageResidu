@@ -55,8 +55,8 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return Ok(users);
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(UsersListDTO id)
+        [HttpGet("/users/:id")]
+        public async Task<IActionResult> GetById(int id)
         {
             var user = await _usersService.GetById(id);
             if (user == null)
@@ -64,7 +64,43 @@ namespace EvlyCorpBackend.API.Controllers
                 return NotFound();
             }
             return Ok(user);
-        }   
+        }
+        
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] UsersDeleteDTO usersDeleteDTO)
+        {
+            var result = await _usersService.Delete(usersDeleteDTO);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UsersUpdateDTO usersUpdateDTO)
+        {
+            var result = await _usersService.Update(usersUpdateDTO);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+        //asi se actualiza una parte de una tabla en la base de datos
+        [HttpPatch("/usersProfile")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] UserUpdateProfileDTO userUpdateDto)
+        {
+            if (userUpdateDto == null)
+            {
+                return BadRequest();
+            }
+
+            await _usersService.UpdatePartialAsync(id, userUpdateDto);
+            return NoContent();
+        }
+
+
 
 
     }

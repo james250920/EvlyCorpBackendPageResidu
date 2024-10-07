@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvlyCorpBackend.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21b92bba38c93ab4224a9d3f3ad2ac74d9a90825")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87dbfb4864dedf0424693cc1df35a55901177a74")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvlyCorpBackend.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvlyCorpBackend.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
