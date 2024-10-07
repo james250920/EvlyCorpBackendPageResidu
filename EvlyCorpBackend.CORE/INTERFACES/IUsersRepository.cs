@@ -1,4 +1,5 @@
-﻿using infrastructure.DATA;
+﻿using EvlyCorpBackend.CORE.DTOs;
+using infrastructure.DATA;
 
 namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 {
@@ -11,5 +12,7 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         Task<Users> GetUserCredentials(string email, string password);
         Task<bool> Insert(Users user);
         Task<bool> Update(Users user);
+        Task UpdatePartialAsync(int userId, UserUpdateProfileDTO userUpdateDto);
     }
+     
 }

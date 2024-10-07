@@ -15,7 +15,7 @@ namespace EvlyCorpBackend.API.Controllers
         {
             _wastesService = wastesService;
         }
-        [HttpGet]
+        [HttpGet("/condominiums/wastes")]
         public async Task<IActionResult> GetAll()
         {
             var wastes = await _wastesService.GetAll();

@@ -1,4 +1,5 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using EvlyCorpBackend.CORE.DTOs;
+using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using infrastructure.DATA;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -89,8 +90,23 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
                 .AnyAsync();
 
         }
+        //actualizar solo 2 atributos
+        public async Task UpdatePartialAsync(int userId, UserUpdateProfileDTO userUpdateDto)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
 
+            // Actualiza solo el email y el phone
+            user.Email = userUpdateDto.Email;
+            user.Phone = userUpdateDto.Phone;
 
+            await _context.SaveChangesAsync();
+        }
+        
+       
 
     }
 }

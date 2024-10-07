@@ -36,7 +36,7 @@ namespace EvlyCorpBackend.API.Controllers
             var result = await _ordersService.Delete(id);
             return Ok(result);
         }
-        [HttpGet]
+        [HttpGet("/orders/condominiums/history")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _ordersService.GetAll();

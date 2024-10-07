@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvlyCorpBackend.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CondominiumsController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace EvlyCorpBackend.API.Controllers
         {
             _service = service;
         }
-        [HttpPost]
+        [HttpPost("/municipalities/{municipalityId}/condominiums")]
         public async Task<IActionResult> Insert([FromBody] CondominiumsInsertDTO condominium)
         {
             var result = await _service.Insert(condominium);
@@ -46,7 +46,7 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return NotFound();
         }
-        [HttpGet]
+        [HttpGet("/municipalities/{municipalityId}/condominiums")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();
