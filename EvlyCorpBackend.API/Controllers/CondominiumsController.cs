@@ -46,7 +46,7 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return NotFound();
         }
-        [HttpGet("/municipalities/{municipalityId}/condominiums")]
+        [HttpGet("/municipalities/municipalityId/condominiums")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();

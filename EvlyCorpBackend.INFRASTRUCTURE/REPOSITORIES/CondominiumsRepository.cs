@@ -44,14 +44,15 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         {
             return await _context.Condominiums
                 .Include(x => x.Municipality)
-                .Include(x => x.Representative).ToListAsync();
+                .Include(x => x.Representative).ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .ToListAsync();
         }
 
         public async Task<Condominiums> GetById(int id)
         {
             return await _context.Condominiums
                 .Include(x => x.Municipality)
-                .Include(x => x.Representative)
+                .Include(x => x.Representative).ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .Where(x => x.Id == id).FirstOrDefaultAsync();
         }
     }

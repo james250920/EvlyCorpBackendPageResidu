@@ -44,7 +44,7 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 
         public async Task<bool> Update(Users user)
         {
-
+  
             var existingUser = await _context.Users.FindAsync(user.Id);
             if (existingUser == null)
             {
@@ -69,7 +69,8 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<IEnumerable<Users>> GetAll()
         {
 
-            return await _context.Users.Include(x => x.District).ToListAsync();
+            return await _context.Users.Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .ToListAsync();
 
 
         }
@@ -77,7 +78,7 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<Users> GetById(int id)
         {
             return await _context.Users
-                .Where(x => x.Id == id).Include(x => x.District)
+                .Where(x => x.Id == id).Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .FirstOrDefaultAsync();
 
 
@@ -105,8 +106,22 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 
             await _context.SaveChangesAsync();
         }
+
         
-       
+        //Obtener todos los recicladores
+        public async Task<IEnumerable<Users>> GetAllRecyclers()
+        {
+            return await _context.Users
+                .Where(x => x.Role == "Reciclers").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .ToListAsync();
+        }
+        public async Task<Users> GetByIdRecycler(int id)
+        {
+            return await _context.Users
+                .Where(x => x.Id == id && x.Role == "Reciclers").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .FirstOrDefaultAsync();
+        }
+
 
     }
 }
