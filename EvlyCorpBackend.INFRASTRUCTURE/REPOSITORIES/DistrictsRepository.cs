@@ -18,13 +18,13 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         }
         public async Task<IEnumerable<Districts>> GetAll()
         {
-            return await _context.Districts.Include(x => x.Province).ToListAsync();
+            return await _context.Districts.Include(x => x.Province).ThenInclude( x => x.Department)
+                .ToListAsync();
         }
         public async Task<Districts> GetById(int id)
         {
             return await _context.Districts
-                .Include(x => x.Province)
-
+                .Include(x => x.Province).ThenInclude(x => x.Department)
                 .FirstOrDefaultAsync(z => z.Id == id);
         }
         public async Task<bool> Insert(Districts district)

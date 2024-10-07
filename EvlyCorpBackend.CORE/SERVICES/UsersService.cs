@@ -183,7 +183,82 @@ namespace EvlyCorpBackend.CORE.SERVICES
         {
             await _usersRepository.UpdatePartialAsync(userId, userUpdateDto);
         }
-        
+       
+        public async Task<UsersListDTO> GetByIdRecycler(int usersDTO)
+        {
+            var user = await _usersRepository.GetByIdRecycler(usersDTO);
+
+            if (user == null)
+            {
+                // Manejo del caso en que el usuario no es encontrado
+                throw new ArgumentNullException(nameof(user), "User not found.");
+            }
+
+            var userDTO = new UsersListDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Document = user.Document,
+                Phone = user.Phone,
+                PhotoUrl = user.PhotoUrl,
+                Email = user.Email,
+                Address = user.Address,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                District = user.District != null ? new DistrictsListDTO
+                {
+                    Id = user.District.Id,
+                    Name = user.District.Name,
+                    Province = user.District.Province != null ? new ProvincesDepartmentsDTO
+                    {
+                        Id = user.District.Province.Id,
+                        Name = user.District.Province.Name,
+                        Department = user.District.Province.Department != null ? new DepartmentsListDTO
+                        {
+                            Id = user.District.Province.Department.Id,
+                            Name = user.District.Province.Department.Name,
+                        } : null
+                    } : null
+                } : null
+            };
+
+            return userDTO;
+        }
+        public async Task<IEnumerable<UsersListDTO>> GetAllRecyclers()
+        {
+            var users = await _usersRepository.GetAllRecyclers();
+
+            return users.Select(user => new UsersListDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Document = user.Document,
+                Phone = user.Phone,
+                PhotoUrl = user.PhotoUrl,
+                Email = user.Email,
+                Address = user.Address,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                District = user.District != null ? new DistrictsListDTO
+                {
+                    Id = user.District.Id,
+                    Name = user.District.Name,
+                    Province = user.District.Province != null ? new ProvincesDepartmentsDTO
+                    {
+                        Id = user.District.Province.Id,
+                        Name = user.District.Province.Name,
+                        Department = user.District.Province.Department != null ? new DepartmentsListDTO
+                        {
+                            Id = user.District.Province.Department.Id,
+                            Name = user.District.Province.Department.Name,
+                        } : null
+                    } : null
+                } : null
+            }).ToList();
+        }
+
     }
 }
 

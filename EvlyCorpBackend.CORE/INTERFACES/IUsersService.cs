@@ -12,6 +12,9 @@ namespace EvlyCorpBackend.CORE.SERVICES
         Task<bool> Register(UsersInsertDTO usersInsertDTO);
         Task<bool> Update(UsersUpdateDTO usersUpdateDTO);
         Task UpdatePartialAsync(int userId, UserUpdateProfileDTO userUpdateDto);
+   
+        Task<UsersListDTO> GetByIdRecycler(int usersDTO);
+        Task<IEnumerable<UsersListDTO>> GetAllRecyclers();
 
     }
 }

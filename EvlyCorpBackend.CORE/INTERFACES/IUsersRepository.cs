@@ -13,6 +13,8 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         Task<bool> Insert(Users user);
         Task<bool> Update(Users user);
         Task UpdatePartialAsync(int userId, UserUpdateProfileDTO userUpdateDto);
+        Task<Users> GetByIdRecycler(int id);
+        Task<IEnumerable<Users>> GetAllRecyclers();
     }
      
 }

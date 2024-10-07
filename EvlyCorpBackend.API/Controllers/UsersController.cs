@@ -99,9 +99,28 @@ namespace EvlyCorpBackend.API.Controllers
             await _usersService.UpdatePartialAsync(id, userUpdateDto);
             return NoContent();
         }
+        //reciclers
 
-
-
+        [HttpGet("/recyclers")]
+        public async Task<IActionResult> GetAllRecyclers()
+        {
+            var users = await _usersService.GetAllRecyclers();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+        [HttpGet("/recyclers/:id")]
+        public async Task<IActionResult> GetByIdRecycler(int id)
+        {
+            var user = await _usersService.GetByIdRecycler(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
 
     }
 }
