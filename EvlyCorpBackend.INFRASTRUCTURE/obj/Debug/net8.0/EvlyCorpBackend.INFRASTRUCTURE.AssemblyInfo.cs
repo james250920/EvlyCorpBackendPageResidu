@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvlyCorpBackend.INFRASTRUCTURE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f10464c98799ef29ad0f02e9972b118ae795e097")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a45ab5b430bbc0c0cd2ba3d950a96ee78267fc31")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvlyCorpBackend.INFRASTRUCTURE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvlyCorpBackend.INFRASTRUCTURE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -60,7 +60,8 @@ namespace EvlyCorpBackend.CORE.SERVICES
             wastes.Price = wastesInsertDTO.Price;
             wastes.MeasurementUnit = wastesInsertDTO.MeasurementUnit;
             wastes.CreatedAt = DateTime.Now;
-            
+            wastes.UpdatedAt = DateTime.Now;
+
             var result = await _wastesRepository.Insert(wastes);
             return result;
             
@@ -76,7 +77,9 @@ namespace EvlyCorpBackend.CORE.SERVICES
             wastes.Price = wastesUpdateDTO.Price;
             wastes.MeasurementUnit = wastesUpdateDTO.MeasurementUnit;
             wastes.UpdatedAt = DateTime.Now;
-            
+            wastes.UpdatedAt = DateTime.Now;
+
+
             var result = await _wastesRepository.Update(wastes);
             return result;
         }
