@@ -1,0 +1,142 @@
+
+
+
+
+-- Crear tabla para departamentos
+CREATE TABLE departments (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL
+);
+
+-- Crear tabla para provincias
+CREATE TABLE provinces (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    department_id INT,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
+);
+
+-- Crear tabla para distritos
+CREATE TABLE districts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    province_id INT NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    CONSTRAINT fk_province FOREIGN KEY (province_id) REFERENCES provinces(id) ON DELETE CASCADE
+);
+
+-- Crear tabla para municipios
+CREATE TABLE municipalities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    logo_url VARCHAR(255),
+    phone VARCHAR(50),
+    email VARCHAR(255),
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL
+);
+
+-- Crear tabla para usuarios
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    document VARCHAR(50) NOT NULL,
+    document_type VARCHAR(50) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    photo_url VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    district_id INT NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    CONSTRAINT fk_district FOREIGN KEY (district_id) REFERENCES districts(id) ON DELETE CASCADE
+);
+
+-- Crear tabla para empresas de gestión
+CREATE TABLE management_company (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    tax_address VARCHAR(255),
+    website_url VARCHAR(255),
+    ruc VARCHAR(50) NOT NULL,
+    logo_url VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(50),
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL
+);
+
+-- Crear tabla para residuos
+CREATE TABLE wastes (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    measurement_unit VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL
+);
+
+-- Crear tabla para condominios
+CREATE TABLE condominiums (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    postal_code VARCHAR(20),
+    google_map_url VARCHAR(255),
+    total_area DECIMAL(10, 2),
+    profit_rate DECIMAL(10, 2),
+    unit_types VARCHAR(255) NOT NULL,
+    units_per_condominium INT NOT NULL,
+    incorporation_date TIMESTAMP,
+    address VARCHAR(255),
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    municipality_id INT NOT NULL,
+    representative_id INT NOT NULL,
+    management_company_id INT NOT NULL,
+    CONSTRAINT fk_municipality FOREIGN KEY (municipality_id) REFERENCES municipalities(id) ON DELETE CASCADE,
+    CONSTRAINT fk_representative FOREIGN KEY (representative_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_management_company FOREIGN KEY (management_company_id) REFERENCES management_company(id) ON DELETE CASCADE
+);
+
+-- Crear tabla para residuos de condominios
+CREATE TABLE condominium_wastes (
+    id SERIAL PRIMARY KEY,
+    weight DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    free_collection BOOLEAN NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    waste_id INT NOT NULL,
+    condominium_id INT NOT NULL,
+    CONSTRAINT fk_condominium FOREIGN KEY (condominium_id) REFERENCES condominiums(id) ON DELETE CASCADE,
+    CONSTRAINT fk_waste FOREIGN KEY (waste_id) REFERENCES wastes(id) ON DELETE CASCADE
+);
+
+-- Crear tabla para órdenes
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP(3) NOT NULL,
+    condominium_waste_id INT NOT NULL,
+    waste_id INT NOT NULL,
+    CONSTRAINT fk_condominium_waste FOREIGN KEY (condominium_waste_id) REFERENCES condominium_wastes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_waste FOREIGN KEY (waste_id) REFERENCES wastes(id) ON DELETE CASCADE
+);
+
+
+
+
+
+
+

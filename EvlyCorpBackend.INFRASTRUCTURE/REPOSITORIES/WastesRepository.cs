@@ -1,5 +1,6 @@
 ﻿using EvlyCorpBackend.CORE.INTERFACES;
 using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using infrastructure.DATA;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,14 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
             int rows = await _context.SaveChangesAsync();
             return rows > 0;
         }
-      
+
         public async Task<bool> Update(Wastes wastes)
         {
             _context.Wastes.Update(wastes);
             int rows = await _context.SaveChangesAsync();
             return rows > 0;
         }
-       
+
         public async Task<bool> Delete(int id)
         {
             var wastes = await _context.Wastes.FindAsync(id);
@@ -52,7 +53,7 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<Wastes> GetById(int id)
         {
             return await _context.Wastes.Where(x => x.Id == id).FirstOrDefaultAsync();
-       
+
         }
 
 

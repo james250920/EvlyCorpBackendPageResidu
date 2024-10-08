@@ -1,4 +1,5 @@
 ﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using infrastructure.DATA;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,24 +16,24 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         {
             _context = context;
         }
-        public async Task<IEnumerable<DistrictsUpdatetDTO>> GetAll()
+        public async Task<IEnumerable<Districts>> GetAll()
         {
-            return await _context.Districts.Include(x => x.Province).Include(y => y.Department).ToListAsync();
+            return await _context.Districts.Include(x => x.Province).ThenInclude( x => x.Department)
+                .ToListAsync();
         }
-        public async Task<DistrictsUpdatetDTO> GetById(int id)
+        public async Task<Districts> GetById(int id)
         {
             return await _context.Districts
-                .Include(x => x.Province)
-                .Include(y => y.Department)
+                .Include(x => x.Province).ThenInclude(x => x.Department)
                 .FirstOrDefaultAsync(z => z.Id == id);
         }
-        public async Task<bool> Insert(DistrictsUpdatetDTO district)
+        public async Task<bool> Insert(Districts district)
         {
             await _context.Districts.AddAsync(district);
             int rows = await _context.SaveChangesAsync();
             return rows > 0;
         }
-        public async Task<bool> Update(DistrictsUpdatetDTO district)
+        public async Task<bool> Update(Districts district)
         {
             _context.Districts.Update(district);
             int rows = await _context.SaveChangesAsync();

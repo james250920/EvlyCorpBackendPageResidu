@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvlyCorpBackend.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class WastesController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace EvlyCorpBackend.API.Controllers
             return Ok(wastes);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("waste/:id{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var wastes = await _wastesService.GetById(id);
@@ -42,13 +42,10 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return NoContent();
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id,[FromBody]  WastesUpdateDTO wastesUpdateDTO)
+        [HttpPut("waste/:id")]
+        public async Task<IActionResult> Update([FromBody]  WastesUpdateDTO wastesUpdateDTO)
         {
-            if (id != wastesUpdateDTO.Id)
-            {
-                return NotFound();
-            }
+            
             var result = await _wastesService.Update(wastesUpdateDTO);
             if (result)
             {
@@ -65,6 +62,13 @@ namespace EvlyCorpBackend.API.Controllers
                 return BadRequest();
             }
             return Ok();
+        }
+        [HttpGet("wastes/export")]
+        public async Task<IActionResult> ExportToCsv()
+        {
+            var stream = await _wastesService.ExportToCsv();
+            var fileName = $"Wastes_{DateTime.Now:yyyyMMddHHmmss}.csv"; // Nombre del archivo
+            return File(stream, "text/csv", fileName); // Retornar el archivo CSV
         }
     }
 }

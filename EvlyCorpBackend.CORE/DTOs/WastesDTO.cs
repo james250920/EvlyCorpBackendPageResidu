@@ -29,6 +29,7 @@ namespace EvlyCorpBackend.CORE.DTOs
         public decimal Price { get; set; }
         public string MeasurementUnit { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
     public class WastesUpdateDTO
     {
@@ -36,8 +37,8 @@ namespace EvlyCorpBackend.CORE.DTOs
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
         public string MeasurementUnit { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }   
     public class WastesDeleteDTO
     {

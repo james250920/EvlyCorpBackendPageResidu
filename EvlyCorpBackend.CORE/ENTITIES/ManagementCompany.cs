@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class ManagementCompany
 {
@@ -25,4 +25,6 @@ public partial class ManagementCompany
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
+
+    public virtual ICollection<Condominiums> Condominiums { get; set; } = new List<Condominiums>(); // Relación con Condominiums
 }

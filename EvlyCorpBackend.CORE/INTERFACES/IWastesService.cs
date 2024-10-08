@@ -9,5 +9,7 @@ namespace EvlyCorpBackend.CORE.INTERFACES
         Task<WastesDTO> GetById(int id);
         Task<bool> Insert(WastesInsertDTO wastesInsertDTO);
         Task<bool> Update(WastesUpdateDTO wastesUpdateDTO);
+        Task<MemoryStream> ExportToCsv();
     }
+    
 }

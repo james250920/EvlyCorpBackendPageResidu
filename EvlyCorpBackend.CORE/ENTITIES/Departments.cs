@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Departments
 {
@@ -14,11 +14,5 @@ public partial class Departments
 
     public DateTime UpdatedAt { get; set; }
 
-    public int? ProvinceId { get; set; }
-
-    public virtual ICollection<DistrictsUpdatetDTO> Districts { get; set; } = new List<DistrictsUpdatetDTO>();
-
-    public virtual Provinces? Province { get; set; }
-
-    public virtual ICollection<Users> Users { get; set; } = new List<Users>();
+    public virtual ICollection<Provinces> Provinces { get; set; } = new List<Provinces>();
 }

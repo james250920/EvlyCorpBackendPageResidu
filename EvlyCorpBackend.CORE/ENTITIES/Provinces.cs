@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Provinces
 {
@@ -9,7 +9,13 @@ public partial class Provinces
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<Departments> Departments { get; set; } = new List<Departments>();
+    public int? DepartmentId { get; set; }
 
-    public virtual ICollection<DistrictsUpdatetDTO> Districts { get; set; } = new List<DistrictsUpdatetDTO>();
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
+
+    public virtual Departments? Department { get; set; }
+
+    public virtual ICollection<Districts> Districts { get; set; } = new List<Districts>();
 }

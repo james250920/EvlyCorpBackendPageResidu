@@ -1,12 +1,12 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 
-namespace EvlyCorpBackend.CORE.INTERFACES
+namespace EvlyCorpBackend.CORE.SERVICES
 {
     public interface IProvincesService
     {
         Task<bool> Delete(ProvincesDeleteDTO provincesDeleteDTO);
-        Task<IEnumerable<ProvincesListDTO>> GetAll();
-        Task<ProvincesDTO> GetById(int id);
+        Task<IEnumerable<ProvincesDepartmentsDTO>> GetAll();
+        Task<ProvincesDepartmentsDTO> GetById(int id);
         Task<bool> Insert(ProvincesInsertDTO provincesInsertDTO);
         Task<bool> Update(ProvincesUpdateDTO provincesUpdateDTO);
     }

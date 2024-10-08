@@ -1,8 +1,8 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using infrastructure.DATA;
 
 namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 {
-    public interface ImunicipalitiesRepository
+    public interface IMunicipalitiesRepository
     {
         Task<bool> Delete(int id);
         Task<IEnumerable<Municipalities>> GetAll();
