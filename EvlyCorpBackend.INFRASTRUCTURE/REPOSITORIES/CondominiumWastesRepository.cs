@@ -41,14 +41,17 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<IEnumerable<CondominiumWastes>> GetAll()
         {
             return await _context.CondominiumWastes
-                .Include(x => x.Condominium).ThenInclude(x => x.Municipality).Include(x => x.Condominium).ThenInclude(x => x.Representative).ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .Include(x => x.Condominium).ThenInclude(x => x.Municipality).
+                Include(x => x.Condominium).ThenInclude(x => x.Representative).
+                ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .Include(y => y.Waste)
                 .ToListAsync();
         }
         public async Task<CondominiumWastes> GetById(int id)
         {
             return await _context.CondominiumWastes
-                .Include(x => x.Condominium).ThenInclude(x => x.Municipality).Include(x => x.Condominium).ThenInclude(x => x.Representative).ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .Include(x => x.Condominium).ThenInclude(x => x.Municipality).Include(x => x.Condominium).
+                ThenInclude(x => x.Representative).ThenInclude(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .Include(y => y.Waste)
                 .Where(x => x.Id == id).FirstOrDefaultAsync();
         }

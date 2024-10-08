@@ -38,7 +38,7 @@ public partial class ResiduContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=residu5;Username=postgres;Password=sistemas", x => x.UseNodaTime());
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=residu1.2;Username=postgres;Password=sistemas", x => x.UseNodaTime());
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -118,6 +118,16 @@ public partial class ResiduContext : DbContext
                 .HasColumnType("timestamp(3) without time zone")
                 .HasColumnName("updated_at");
 
+            // Nueva propiedad para management_company_id
+            entity.Property(e => e.ManagementCompanyId).HasColumnName("management_company_id");
+
+            // Relación con la tabla ManagementCompany
+            entity.HasOne(d => d.ManagementCompany)
+                .WithMany(p => p.Condominiums)
+                .HasForeignKey(d => d.ManagementCompanyId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_management_company");
+
             entity.HasOne(d => d.Municipality).WithMany(p => p.Condominiums)
                 .HasForeignKey(d => d.MunicipalityId)
                 .HasConstraintName("fk_municipality");
@@ -126,6 +136,7 @@ public partial class ResiduContext : DbContext
                 .HasForeignKey(d => d.RepresentativeId)
                 .HasConstraintName("fk_representative");
         });
+
 
         modelBuilder.Entity<Departments>(entity =>
         {

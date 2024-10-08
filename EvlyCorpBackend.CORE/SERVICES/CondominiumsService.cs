@@ -35,7 +35,8 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 Address = condominium.Address,
                 CreatedAt = DateTime.Now,
                 MunicipalityId = condominium.MunicipalityId,
-                RepresentativeId = condominium.RepresentativeId
+                RepresentativeId = condominium.RepresentativeId,
+                ManagementCompanyId = condominium.ManagementCompanyId
             };
             return await _repository.Insert(condominiums);
 
@@ -58,7 +59,8 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 CreatedAt = condominium.CreatedAt,
                 UpdatedAt = DateTime.Now,
                 MunicipalityId = condominium.MunicipalityId,
-                RepresentativeId = condominium.RepresentativeId
+                RepresentativeId = condominium.RepresentativeId,
+                ManagementCompanyId = condominium.ManagementCompanyId
             };
             return await _repository.Update(condominiums);
         }
@@ -132,7 +134,20 @@ namespace EvlyCorpBackend.CORE.SERVICES
 
                     } : null 
 
-                } : null 
+                } : null,
+                ManagementCompany = condominiums.ManagementCompany != null ?  new ManagementCompanyListDTO()
+                {
+                    Id = condominiums.ManagementCompany.Id,
+                    Name = condominiums.ManagementCompany.Name,
+                    TaxAddress = condominiums.ManagementCompany.TaxAddress,
+                    WebsiteUrl = condominiums.ManagementCompany.WebsiteUrl,
+                    Ruc = condominiums.ManagementCompany.Ruc,
+                    LogoUrl = condominiums.ManagementCompany.LogoUrl,
+                    Email = condominiums.ManagementCompany.Email,
+                    Phone = condominiums.ManagementCompany.Phone,
+                    CreatedAt = condominiums.ManagementCompany.CreatedAt,
+                    UpdatedAt = condominiums.ManagementCompany.UpdatedAt
+                } : null
             };
         }
 
@@ -198,10 +213,25 @@ namespace EvlyCorpBackend.CORE.SERVICES
 
                     } : null
 
-                } : null 
+                } : null,
+                ManagementCompany = x.ManagementCompany != null ? new ManagementCompanyListDTO()
+                {
+                    Id = x.ManagementCompany.Id,
+                    Name = x.ManagementCompany.Name,
+                    TaxAddress = x.ManagementCompany.TaxAddress,
+                    WebsiteUrl = x.ManagementCompany.WebsiteUrl,
+                    Ruc = x.ManagementCompany.Ruc,
+                    LogoUrl = x.ManagementCompany.LogoUrl,
+                    Email = x.ManagementCompany.Email,
+                    Phone = x.ManagementCompany.Phone,
+                    CreatedAt = x.ManagementCompany.CreatedAt,
+                    UpdatedAt = x.ManagementCompany.UpdatedAt
+                } : null
+
 
             }).ToList();
         }
+
 
 
     }

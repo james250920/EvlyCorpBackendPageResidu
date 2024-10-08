@@ -16,7 +16,7 @@ namespace EvlyCorpBackend.API.Controllers
         {
             _service = service;
         }
-        [HttpPost("/municipalities/{municipalityId}/condominiums")]
+        [HttpPost("/municipalities/municipalityId/condominiums")]
         public async Task<IActionResult> Insert([FromBody] CondominiumsInsertDTO condominium)
         {
             var result = await _service.Insert(condominium);

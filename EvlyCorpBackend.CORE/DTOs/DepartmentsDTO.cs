@@ -35,7 +35,16 @@
     {
         public int Id { get; set; }
     }
-   
+
+    ///usersReferences
+    public class DepartmentsUsersDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+
 }
 
 
