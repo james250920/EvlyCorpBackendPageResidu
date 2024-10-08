@@ -55,6 +55,11 @@ namespace EvlyCorpBackend.CORE.SERVICES
             }
 
             var token = _jwtService.GenerateJWToken(user);
+
+            // Acceder al primer ManagementCompany si existe
+            var firstCondominium = user.Condominiums?.FirstOrDefault();
+            var managementCompany = firstCondominium?.ManagementCompany;
+
             var userDTO = new UsersAuthenticationsDTO
             {
                 Id = user.Id,
@@ -66,12 +71,119 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 PhotoUrl = user.PhotoUrl,
                 Email = user.Email,
                 Address = user.Address,
-                DistrictId = user.DistrictId,
+
+                // Mapeo del distrito
+                District = user.District != null ? new DistrictsListDTO
+                {
+                    Id = user.District.Id,
+                    Name = user.District.Name,
+                    Province = user.District.Province != null ? new ProvincesDepartmentsDTO
+                    {
+                        Id = user.District.Province.Id,
+                        Name = user.District.Province.Name,
+                        Department = user.District.Province.Department != null ? new DepartmentsListDTO
+                        {
+                            Id = user.District.Province.Department.Id,
+                            Name = user.District.Province.Department.Name
+                        } : null
+                    } : null
+                } : null,
+
                 Role = user.Role,
+                /*Mapeo de ManagementCompany
+                Company = managementCompany != null ? new ManagementCompanyListDTO
+                {
+                    Id = managementCompany.Id,
+                    Name = managementCompany.Name,
+                    TaxAddress = managementCompany.TaxAddress,
+                    WebsiteUrl = managementCompany.WebsiteUrl,
+                    Ruc = managementCompany.Ruc,
+                    LogoUrl = managementCompany.LogoUrl,
+                    Email = managementCompany.Email,
+                    Phone = managementCompany.Phone,
+                    CreatedAt = managementCompany.CreatedAt,
+                    UpdatedAt = managementCompany.UpdatedAt
+                } : null,
+                */
+                // Mapeo del departamento
+                Department = user.District?.Province?.Department != null ? new DepartmentsUsersDTO
+                {
+                    Id = user.District.Province.Department.Id,
+                    Name = user.District.Province.Department.Name,
+                    CreatedAt = user.District.Province.Department.CreatedAt,
+                    UpdatedAt = user.District.Province.Department.UpdatedAt
+                } : null,
+
+                // Lista de condominios
+                Condominiums = user.Condominiums?.Select(condominium => new CondominiumsListRDTO
+                {
+                    Id = condominium.Id,
+                    Name = condominium.Name,
+                    PostalCode = condominium.PostalCode,
+                    GoogleMapUrl = condominium.GoogleMapUrl,
+                    TotalArea = condominium.TotalArea,
+                    ProfitRate = condominium.ProfitRate,
+                    UnitTypes = condominium.UnitTypes,
+                    UnitsPerCondominium = condominium.UnitsPerCondominium,
+                    IncorporationDate = condominium.IncorporationDate,
+                    Address = condominium.Address,
+                    CreatedAt = condominium.CreatedAt,
+                    UpdatedAt = condominium.UpdatedAt,
+
+                    // Mapeo del representante
+                    Representative = condominium.Representative != null ? new UsersListDTO
+                    {
+                        Id = condominium.Representative.Id,
+                        FirstName = condominium.Representative.FirstName,
+                        LastName = condominium.Representative.LastName,
+                        Document = condominium.Representative.Document,
+                        Phone = condominium.Representative.Phone,
+                        PhotoUrl = condominium.Representative.PhotoUrl,
+                        Email = condominium.Representative.Email,
+                        Address = condominium.Representative.Address,
+                        CreatedAt = condominium.Representative.CreatedAt,
+                        UpdatedAt = condominium.Representative.UpdatedAt,
+
+                        // Mapeo del distrito del representante
+                        District = condominium.Representative.District != null ? new DistrictsListDTO
+                        {
+                            Id = condominium.Representative.District.Id,
+                            Name = condominium.Representative.District.Name,
+                            Province = condominium.Representative.District.Province != null ? new ProvincesDepartmentsDTO
+                            {
+                                Id = condominium.Representative.District.Province.Id,
+                                Name = condominium.Representative.District.Province.Name,
+                                Department = condominium.Representative.District.Province.Department != null ? new DepartmentsListDTO
+                                {
+                                    Id = condominium.Representative.District.Province.Department.Id,
+                                    Name = condominium.Representative.District.Province.Department.Name
+                                } : null
+                            } : null
+                        } : null
+                    } : null,
+
+                    Company = condominium.ManagementCompany != null ? new ManagementCompanyListDTO
+                    {
+                        Id = condominium.ManagementCompany.Id,
+                        Name = condominium.ManagementCompany.Name,
+                        TaxAddress = condominium.ManagementCompany.TaxAddress,
+                        WebsiteUrl = condominium.ManagementCompany.WebsiteUrl,
+                        Ruc = condominium.ManagementCompany.Ruc,
+                        LogoUrl = condominium.ManagementCompany.LogoUrl,
+                        Email = condominium.ManagementCompany.Email,
+                        Phone = condominium.ManagementCompany.Phone,
+                        CreatedAt = condominium.ManagementCompany.CreatedAt,
+                        UpdatedAt = condominium.ManagementCompany.UpdatedAt
+                    } : null
+                }).ToList(),
+
                 Token = token
             };
+
             return userDTO;
         }
+
+
         public async Task<bool> Update(UsersUpdateDTO usersUpdateDTO)
         {
             var user = new Users

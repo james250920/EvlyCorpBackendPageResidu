@@ -89,8 +89,17 @@ namespace EvlyCorpBackend.CORE.DTOs
         public string? PhotoUrl { get; set; }
         public string Email { get; set; } = null!;
         public string? Address { get; set; }
-        public int DistrictId { get; set; }
+        public DistrictsListDTO District { get; set; }
+
         public string Role { get; set; } = null!;
+
+        // managementCompany
+        //public ManagementCompanyListDTO Company { get; set; }
+        //Department
+        public DepartmentsUsersDTO Department { get; set; }
+        //Condominiums
+        public ICollection<CondominiumsListRDTO> Condominiums { get; set; }
+
         public string? Token { get; set; }
     }
     public class UsersLoginDTO

@@ -62,6 +62,9 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 
             return await _context.Users
                 .Where(x => x.Email == email && x.Password == password)
+                .Include(x => x.District).ThenInclude(x => x.Province)
+                .ThenInclude(x => x.Department).Include(y => y.Condominiums).ThenInclude(x => x.Municipality).Include(x => x.Condominiums)
+                .ThenInclude(y => y.ManagementCompany )
                 .FirstOrDefaultAsync();
 
         }
@@ -112,13 +115,13 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<IEnumerable<Users>> GetAllRecyclers()
         {
             return await _context.Users
-                .Where(x => x.Role == "Reciclers").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .Where(x => x.Role == "recicler").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .ToListAsync();
         }
         public async Task<Users> GetByIdRecycler(int id)
         {
             return await _context.Users
-                .Where(x => x.Id == id && x.Role == "Reciclers").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
+                .Where(x => x.Id == id && x.Role == "recicler").Include(x => x.District).ThenInclude(x => x.Province).ThenInclude(x => x.Department)
                 .FirstOrDefaultAsync();
         }
 

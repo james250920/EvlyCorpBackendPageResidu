@@ -1,3 +1,7 @@
+
+
+
+
 -- Crear tabla para departamentos
 CREATE TABLE departments (
     id SERIAL PRIMARY KEY,
@@ -98,8 +102,10 @@ CREATE TABLE condominiums (
     updated_at TIMESTAMP(3) NOT NULL,
     municipality_id INT NOT NULL,
     representative_id INT NOT NULL,
+    management_company_id INT NOT NULL,
     CONSTRAINT fk_municipality FOREIGN KEY (municipality_id) REFERENCES municipalities(id) ON DELETE CASCADE,
-    CONSTRAINT fk_representative FOREIGN KEY (representative_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_representative FOREIGN KEY (representative_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_management_company FOREIGN KEY (management_company_id) REFERENCES management_company(id) ON DELETE CASCADE
 );
 
 -- Crear tabla para residuos de condominios
@@ -127,3 +133,10 @@ CREATE TABLE orders (
     CONSTRAINT fk_condominium_waste FOREIGN KEY (condominium_waste_id) REFERENCES condominium_wastes(id) ON DELETE CASCADE,
     CONSTRAINT fk_waste FOREIGN KEY (waste_id) REFERENCES wastes(id) ON DELETE CASCADE
 );
+
+
+
+
+
+
+
