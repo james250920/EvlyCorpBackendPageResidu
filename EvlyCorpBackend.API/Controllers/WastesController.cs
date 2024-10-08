@@ -66,5 +66,12 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return Ok();
         }
+        [HttpGet("export/csv")]
+        public async Task<IActionResult> ExportToCsv()
+        {
+            var stream = await _wastesService.ExportToCsv();
+            var fileName = $"Wastes_{DateTime.Now:yyyyMMddHHmmss}.csv"; // Nombre del archivo
+            return File(stream, "text/csv", fileName); // Retornar el archivo CSV
+        }
     }
 }
