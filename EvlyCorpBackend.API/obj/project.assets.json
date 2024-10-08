@@ -6565,40 +6565,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\james\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/syaker/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.API.csproj",
+      "projectUniqueName": "/Users/syaker/Documents/Repositories/residu/api-residu/EvlyCorpBackend.API/EvlyCorpBackend.API.csproj",
       "projectName": "EvlyCorpBackend.API",
-      "projectPath": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.API\\EvlyCorpBackend.API.csproj",
-      "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.API\\obj\\",
+      "projectPath": "/Users/syaker/Documents/Repositories/residu/api-residu/EvlyCorpBackend.API/EvlyCorpBackend.API.csproj",
+      "packagesPath": "/Users/syaker/.nuget/packages/",
+      "outputPath": "/Users/syaker/Documents/Repositories/residu/api-residu/EvlyCorpBackend.API/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/syaker/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.INFRASTRUCTURE\\EvlyCorpBackend.INFRASTRUCTURE.csproj": {
-              "projectPath": "C:\\Proyectos\\Evly\\BackendResidu\\Oficial\\EvlyCorpBackendPageResidu\\EvlyCorpBackend.INFRASTRUCTURE\\EvlyCorpBackend.INFRASTRUCTURE.csproj"
+            "/Users/syaker/Documents/Repositories/residu/api-residu/EvlyCorpBackend.INFRASTRUCTURE/EvlyCorpBackend.INFRASTRUCTURE.csproj": {
+              "projectPath": "/Users/syaker/Documents/Repositories/residu/api-residu/EvlyCorpBackend.INFRASTRUCTURE/EvlyCorpBackend.INFRASTRUCTURE.csproj"
             }
           }
         }
@@ -6607,6 +6599,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -6637,7 +6634,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.402/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

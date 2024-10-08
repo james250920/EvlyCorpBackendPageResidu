@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ResiduContext>(options =>
     options.UseNpgsql(_connectionString);
 });
 
-// Configuración de JWTSettings desde el archivo appsettings.json
+// Configuraciï¿½n de JWTSettings desde el archivo appsettings.json
 builder.Services.Configure<JWTSettings>(_config.GetSection("JWTSettings"));
 
 builder.Services.AddTransient<ImunicipalitiesService, MunicipalitiesService>();
@@ -41,7 +41,7 @@ builder.Services.AddTransient<ICondominiumWastesRepository, CondominiumWastesRep
 builder.Services.AddTransient<IOrdersService, OrdersService>();
 builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
 
-// Inyección del servicio JWT
+// Inyecciï¿½n del servicio JWT
 builder.Services.AddTransient<IJWTService, JWTService>();
 
 builder.Services.AddControllers();
@@ -49,14 +49,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Cords
+// CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy", builder => builder
-           .AllowAnyMethod()
+    options.AddPolicy("CorsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
                   .AllowAnyHeader()
-                         .SetIsOriginAllowed((host) => true)
-                                .AllowCredentials());
+                  .AllowAnyMethod();
+        });
 });
 
 var app = builder.Build();
@@ -71,9 +73,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors();
+app.UseCors("CorsPolicy");
 app.MapControllers();
-
-
-
 app.Run();

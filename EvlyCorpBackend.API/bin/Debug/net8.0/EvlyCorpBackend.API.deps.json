@@ -30,7 +30,7 @@
         "runtime": {
           "lib/netstandard2.0/Hangfire.Core.dll": {
             "assemblyVersion": "1.8.0.0",
-            "fileVersion": "1.8.0.0"
+            "fileVersion": "0.0.0.0"
           }
         },
         "resources": {
@@ -1073,7 +1073,10 @@
       },
       "EvlyCorpBackend.CORE/1.0.0": {
         "runtime": {
-          "EvlyCorpBackend.CORE.dll": {}
+          "EvlyCorpBackend.CORE.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "EvlyCorpBackend.INFRASTRUCTURE/1.0.0": {
@@ -1088,7 +1091,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "8.0.8"
         },
         "runtime": {
-          "EvlyCorpBackend.INFRASTRUCTURE.dll": {}
+          "EvlyCorpBackend.INFRASTRUCTURE.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
