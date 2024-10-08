@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using System.Runtime.InteropServices;
+using infrastructure.DATA;
 
 namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 {
-    public class MunicipalitiesRepository : ImunicipalitiesRepository
+    public class MunicipalitiesRepository : IMunicipalitiesRepository
     {
         private readonly ResiduContext _context;
         public MunicipalitiesRepository(ResiduContext context)

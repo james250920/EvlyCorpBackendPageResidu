@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvlyCorpBackend.CORE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d19a5bf0b66ac54ca20c3eda56e1cbea5eb6509f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa2b6ac05786b9f497563382aa77e47540f4e717")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvlyCorpBackend.CORE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvlyCorpBackend.CORE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,8 @@
-﻿namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using System;
+using System.Collections.Generic;
+
+
+namespace infrastructure.DATA;
 
 public partial class Municipalities
 {

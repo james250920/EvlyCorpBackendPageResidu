@@ -1,4 +1,5 @@
 ﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+using infrastructure.DATA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -20,12 +21,11 @@ namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
         public async Task<IEnumerable<Departments>> GetAll()
         {
             return await _context.Departments
-                .Include(x => x.Province).ToListAsync();//esto sirve para traer la relacion de la tabla province
+                .ToListAsync();
         }
         public async Task<Departments> GetById(int id)
         {
             return await _context.Departments
-                .Include(x => x.Province)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<bool> Insert(Departments department)

@@ -1,12 +1,13 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
+using EvlyCorpBackend.CORE.SERVICES;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EvlyCorpBackend.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -30,21 +31,18 @@ namespace EvlyCorpBackend.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("login")]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login([FromBody] UsersLoginDTO usersLoginDTO)
         {
-            // Validar que el email y la contraseña no sean nulos o vacíos
+
             if (string.IsNullOrEmpty(usersLoginDTO.Email) || string.IsNullOrEmpty(usersLoginDTO.Password))
                 return BadRequest(new { message = "Email and password are required." });
 
-            // Llamar al servicio para autenticar al usuario
             var user = await _usersService.Login(usersLoginDTO);
 
-            // Verificar si el usuario fue encontrado
             if (user == null)
                 return Unauthorized(new { message = "Invalid credentials." });
 
-            // Retornar el objeto de usuario autenticado
             return Ok(user);
         }
         [HttpGet]
@@ -57,10 +55,66 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return Ok(users);
         }
-        [HttpGet("{id}")]
+        [HttpGet("/users/:id")]
         public async Task<IActionResult> GetById(int id)
         {
             var user = await _usersService.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+        
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] UsersDeleteDTO usersDeleteDTO)
+        {
+            var result = await _usersService.Delete(usersDeleteDTO);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UsersUpdateDTO usersUpdateDTO)
+        {
+            var result = await _usersService.Update(usersUpdateDTO);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+        //asi se actualiza una parte de una tabla en la base de datos
+        [HttpPatch("/usersProfile")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] UserUpdateProfileDTO userUpdateDto)
+        {
+            if (userUpdateDto == null)
+            {
+                return BadRequest();
+            }
+
+            await _usersService.UpdatePartialAsync(id, userUpdateDto);
+            return NoContent();
+        }
+        //reciclers
+
+        [HttpGet("/recyclers")]
+        public async Task<IActionResult> GetAllRecyclers()
+        {
+            var users = await _usersService.GetAllRecyclers();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+        [HttpGet("/recyclers/:id")]
+        public async Task<IActionResult> GetByIdRecycler(int id)
+        {
+            var user = await _usersService.GetByIdRecycler(id);
             if (user == null)
             {
                 return NotFound();

@@ -1,4 +1,4 @@
-﻿using EvlyCorpBackend.INFRASTRUCTURE.Data;
+﻿using infrastructure.DATA;
 
 namespace EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES
 {

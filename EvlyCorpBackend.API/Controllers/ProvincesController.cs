@@ -1,11 +1,12 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
+using EvlyCorpBackend.CORE.SERVICES;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvlyCorpBackend.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProvincesController : ControllerBase
     {

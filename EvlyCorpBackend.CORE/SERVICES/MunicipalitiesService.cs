@@ -1,7 +1,7 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.INFRASTRUCTURE.Data;
 using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
+using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace EvlyCorpBackend.CORE.SERVICES
 {
     public class MunicipalitiesService : ImunicipalitiesService
     {
-        private readonly ImunicipalitiesRepository _municipalitiesRepository;
-        public MunicipalitiesService(ImunicipalitiesRepository municipalitiesRepository)
+        private readonly IMunicipalitiesRepository _municipalitiesRepository;
+        public MunicipalitiesService(IMunicipalitiesRepository municipalitiesRepository)
         {
             _municipalitiesRepository = municipalitiesRepository;
         }

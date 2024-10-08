@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Condominiums
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
-    public string? status { get; set; }
+
+    public string Status { get; set; } = null!;
 
     public string? PostalCode { get; set; }
 
@@ -35,9 +36,13 @@ public partial class Condominiums
 
     public int RepresentativeId { get; set; }
 
+    public int ManagementCompanyId { get; set; } // Foreign Key para ManagementCompany
+
     public virtual ICollection<CondominiumWastes> CondominiumWastes { get; set; } = new List<CondominiumWastes>();
 
     public virtual Municipalities Municipality { get; set; } = null!;
 
     public virtual Users Representative { get; set; } = null!;
+
+    public virtual ManagementCompany ManagementCompany { get; set; } = null!; // Relación con ManagementCompany
 }

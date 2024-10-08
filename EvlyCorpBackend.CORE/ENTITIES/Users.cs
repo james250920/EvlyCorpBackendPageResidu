@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace EvlyCorpBackend.INFRASTRUCTURE.Data;
+namespace infrastructure.DATA;
 
 public partial class Users
 {
@@ -24,8 +24,9 @@ public partial class Users
 
     public string? Address { get; set; }
 
-    public int DepartmentId { get; set; }
-    public string? Role { get; set; }
+    public int DistrictId { get; set; }
+
+    public string Role { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 
@@ -35,5 +36,5 @@ public partial class Users
 
     public virtual ICollection<Condominiums> Condominiums { get; set; } = new List<Condominiums>();
 
-    public virtual Departments Department { get; set; } = null!;
+    public virtual Districts District { get; set; } = null!;
 }
