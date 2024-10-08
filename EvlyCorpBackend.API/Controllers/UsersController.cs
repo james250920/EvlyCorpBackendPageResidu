@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EvlyCorpBackend.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
