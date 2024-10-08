@@ -29,7 +29,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 FreeCollection = condominiumWastesInsertDTO.FreeCollection,
                 CreatedAt = DateTime.Now,
                 WasteId = condominiumWastesInsertDTO.WasteId,
-                Status = "Activo",
+                Status = condominiumWastesInsertDTO.Status,
                 CondominiumId = condominiumWastesInsertDTO.CondominiumId
             };
 
@@ -47,7 +47,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 FreeCollection = condominiumWastesUpdateDTO.FreeCollection,
                 UpdatedAt = DateTime.Now,
                 WasteId = condominiumWastesUpdateDTO.WasteId,
-                Status = condominiumWastesUpdateDTO.status,
+                Status = condominiumWastesUpdateDTO.Status,
                 CondominiumId = condominiumWastesUpdateDTO.CondominiumId
             };
 
@@ -67,7 +67,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
 
             if (condominiumWastes == null)
             {
-                return null; 
+                return null;
             }
 
             var condominiumWastesDTO = new CondominiumWastesListDTO
@@ -77,8 +77,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 FreeCollection = condominiumWastes.FreeCollection,
                 CreatedAt = condominiumWastes.CreatedAt,
                 UpdatedAt = condominiumWastes.UpdatedAt,
-                status = condominiumWastes.Status,
-
+                Status = condominiumWastes.Status,
                 Waste = condominiumWastes.Waste != null ? new WastesListDTO
                 {
                     Id = condominiumWastes.Waste.Id,
@@ -101,16 +100,6 @@ namespace EvlyCorpBackend.CORE.SERVICES
                     Address = condominiumWastes.Condominium.Address,
                     CreatedAt = condominiumWastes.Condominium.CreatedAt,
                     UpdatedAt = condominiumWastes.Condominium.UpdatedAt,
-
-                    Municipality = condominiumWastes.Condominium.Municipality != null ? new MunicipalitiesListDTO
-                    {
-                        Id = condominiumWastes.Condominium.Municipality.Id,
-                        Name = condominiumWastes.Condominium.Municipality.Name,
-                        Address = condominiumWastes.Condominium.Municipality.Address,
-                        LogoUrl = condominiumWastes.Condominium.Municipality.LogoUrl,
-                        Phone = condominiumWastes.Condominium.Municipality.Phone,
-                        Email = condominiumWastes.Condominium.Municipality.Email,
-                    } : null, 
 
                     Representative = condominiumWastes.Condominium.Representative != null ? new UsersListDTO
                     {
@@ -137,21 +126,21 @@ namespace EvlyCorpBackend.CORE.SERVICES
                                 {
                                     Id = condominiumWastes.Condominium.Representative.District.Province.Department.Id,
                                     Name = condominiumWastes.Condominium.Representative.District.Province.Department.Name,
-                                } : null 
-                            } : null 
+                                } : null
+                            } : null
 
-                        } : null 
+                        } : null
 
-                    } : null 
+                    } : null
 
-                } : null 
+                } : null
             };
 
             return condominiumWastesDTO;
         }
 
 
-        public async Task<List<CondominiumWastesListDTO>> GetAll()
+        public async Task<IEnumerable<CondominiumWastesListDTO>> GetAll()
         {
             var condominiumWastes = await _condominiumWastesRepository.GetAll();
 
@@ -162,7 +151,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                 FreeCollection = c.FreeCollection,
                 CreatedAt = c.CreatedAt,
                 UpdatedAt = c.UpdatedAt,
-                status = c.Status,
+                Status = c.Status,
 
                 Waste = c.Waste != null ? new WastesListDTO
                 {
@@ -170,7 +159,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                     Name = c.Waste.Name,
                     Price = c.Waste.Price,
                     MeasurementUnit = c.Waste.MeasurementUnit
-                } : null, 
+                } : null,
 
                 Condominium = c.Condominium != null ? new CondominiumsListDTO
                 {
@@ -195,7 +184,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                         LogoUrl = c.Condominium.Municipality.LogoUrl,
                         Phone = c.Condominium.Municipality.Phone,
                         Email = c.Condominium.Municipality.Email,
-                    } : null, 
+                    } : null,
 
                     Representative = c.Condominium.Representative != null ? new UsersListDTO
                     {
@@ -222,21 +211,115 @@ namespace EvlyCorpBackend.CORE.SERVICES
                                 {
                                     Id = c.Condominium.Representative.District.Province.Department.Id,
                                     Name = c.Condominium.Representative.District.Province.Department.Name,
-                                } : null 
-                            } : null 
+                                } : null
+                            } : null
 
-                        } : null 
+                        } : null
 
-                    } : null 
+                    } : null
 
-                } : null 
+                } : null
             });
 
             return condominiumWastesDTO.ToList();
         }
+        // Solo pedicion 
+        public async Task<CondominiumWastesListRepreDTO> GetByIdRepres(int id)
+        {
+            var condominiumWastes = await _condominiumWastesRepository.GetById(id);
+
+            if (condominiumWastes == null)
+            {
+                return null;
+            }
+
+            var condominiumWastesDTO = new CondominiumWastesListRepreDTO
+            {
+                Id = condominiumWastes.Id,
+                Weight = condominiumWastes.Weight,
+                FreeCollection = condominiumWastes.FreeCollection,
+                CreatedAt = condominiumWastes.CreatedAt,
+                UpdatedAt = condominiumWastes.UpdatedAt,
+                Status = condominiumWastes.Status,
+                Waste = condominiumWastes.Waste != null ? new WastesListDTO
+                {
+                    Id = condominiumWastes.Waste.Id,
+                    Name = condominiumWastes.Waste.Name,
+                    Price = condominiumWastes.Waste.Price,
+                    MeasurementUnit = condominiumWastes.Waste.MeasurementUnit
+                } : null,
+
+                Condominium = condominiumWastes.Condominium != null ? new CondominiumsListByRepreDTO
+                {
+                    Id = condominiumWastes.Condominium.Id,
+                    Name = condominiumWastes.Condominium.Name,
+                    PostalCode = condominiumWastes.Condominium.PostalCode,
+                    GoogleMapUrl = condominiumWastes.Condominium.GoogleMapUrl,
+                    TotalArea = condominiumWastes.Condominium.TotalArea,
+                    ProfitRate = condominiumWastes.Condominium.ProfitRate,
+                    UnitTypes = condominiumWastes.Condominium.UnitTypes,
+                    UnitsPerCondominium = condominiumWastes.Condominium.UnitsPerCondominium,
+                    IncorporationDate = condominiumWastes.Condominium.IncorporationDate,
+                    Address = condominiumWastes.Condominium.Address,
+                    CreatedAt = condominiumWastes.Condominium.CreatedAt,
+                    UpdatedAt = condominiumWastes.Condominium.UpdatedAt,
+                    RepresentativeId = condominiumWastes.Condominium.RepresentativeId
+                } : null
+
+            };
+            return condominiumWastesDTO;
 
 
+        }
 
+        //GetAll solo pedicion
 
+        public async Task<IEnumerable<CondominiumWastesListRepreDTO>> GetAllre()
+        {
+            var condominiumWastes = await _condominiumWastesRepository.GetAll();
+
+            var condominiumWastesDTO = condominiumWastes.Select(c => new CondominiumWastesListRepreDTO
+            {
+                Id = c.Id,
+                Weight = c.Weight,
+                FreeCollection = c.FreeCollection,
+                CreatedAt = c.CreatedAt,
+                UpdatedAt = c.UpdatedAt,
+                Status = c.Status,
+
+                Waste = c.Waste != null ? new WastesListDTO
+                {
+                    Id = c.Waste.Id,
+                    Name = c.Waste.Name,
+                    Price = c.Waste.Price,
+                    MeasurementUnit = c.Waste.MeasurementUnit
+                } : null,
+
+                Condominium = c.Condominium != null ? new CondominiumsListByRepreDTO
+                {
+                    Id = c.Condominium.Id,
+                    Name = c.Condominium.Name,
+                    PostalCode = c.Condominium.PostalCode,
+                    GoogleMapUrl = c.Condominium.GoogleMapUrl,
+                    TotalArea = c.Condominium.TotalArea,
+                    ProfitRate = c.Condominium.ProfitRate,
+                    UnitTypes = c.Condominium.UnitTypes,
+                    UnitsPerCondominium = c.Condominium.UnitsPerCondominium,
+                    IncorporationDate = c.Condominium.IncorporationDate,
+                    Address = c.Condominium.Address,
+                    CreatedAt = c.Condominium.CreatedAt,
+                    UpdatedAt = c.Condominium.UpdatedAt,
+                    RepresentativeId = c.Condominium.RepresentativeId
+                } : null
+            });
+
+            return condominiumWastesDTO.ToList();
+        }
     }
 }
+
+
+
+
+
+

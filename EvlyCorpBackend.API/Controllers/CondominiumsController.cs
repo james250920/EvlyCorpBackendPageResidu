@@ -46,12 +46,12 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return NotFound();
         }
-        [HttpGet("/municipalities/managementCompany/condominiums")]
+        /*[HttpGet("/condominiums")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();
             return Ok(result);
-        }
+        }*/
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

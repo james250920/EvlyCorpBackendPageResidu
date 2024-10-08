@@ -1,6 +1,5 @@
 ﻿using EvlyCorpBackend.CORE.DTOs;
 using EvlyCorpBackend.CORE.INTERFACES;
-using EvlyCorpBackend.CORE.SERVICES;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,13 +39,13 @@ namespace EvlyCorpBackend.API.Controllers
         [HttpGet("/condominium/wastes")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _condominiumWastesService.GetAll();
+            var result = await _condominiumWastesService.GetAllre();
             return Ok(result);
         }
         [HttpGet("/condominium/wastes/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _condominiumWastesService.GetById(id);
+            var result = await _condominiumWastesService.GetByIdRepres(id);
             return Ok(result);
         }
 
