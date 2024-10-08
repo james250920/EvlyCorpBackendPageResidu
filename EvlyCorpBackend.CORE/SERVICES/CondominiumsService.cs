@@ -24,7 +24,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
             var condominiums = new Condominiums()
             {
                 Name = condominium.Name,
-                Status = "Activo",
+                Status = "ACTIVE",
                 PostalCode = condominium.PostalCode,
                 GoogleMapUrl = condominium.GoogleMapUrl,
                 TotalArea = condominium.TotalArea,
@@ -101,7 +101,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                     LogoUrl = condominiums.Municipality.LogoUrl,
                     Phone = condominiums.Municipality.Phone,
                     Email = condominiums.Municipality.Email,
-                } : null, 
+                } : null,
 
                 Representative = condominiums.Representative != null ? new UsersListDTO()
                 {
@@ -128,14 +128,14 @@ namespace EvlyCorpBackend.CORE.SERVICES
                             {
                                 Id = condominiums.Representative.District.Province.Department.Id,
                                 Name = condominiums.Representative.District.Province.Department.Name
-                            } : null 
+                            } : null
 
-                        } : null 
+                        } : null
 
-                    } : null 
+                    } : null
 
                 } : null,
-                ManagementCompany = condominiums.ManagementCompany != null ?  new ManagementCompanyListDTO()
+                ManagementCompany = condominiums.ManagementCompany != null ? new ManagementCompanyListDTO()
                 {
                     Id = condominiums.ManagementCompany.Id,
                     Name = condominiums.ManagementCompany.Name,
@@ -178,7 +178,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                     LogoUrl = x.Municipality.LogoUrl,
                     Phone = x.Municipality.Phone,
                     Email = x.Municipality.Email,
-                } : null,  
+                } : null,
 
                 Representative = x.Representative != null ? new UsersListDTO()
                 {
@@ -207,7 +207,7 @@ namespace EvlyCorpBackend.CORE.SERVICES
                             {
                                 Id = x.Representative.District.Province.Department.Id,
                                 Name = x.Representative.District.Province.Department.Name
-                            } : null 
+                            } : null
 
                         } : null
 
@@ -231,8 +231,37 @@ namespace EvlyCorpBackend.CORE.SERVICES
 
             }).ToList();
         }
+        public async Task<IEnumerable<CondominiumsListByRepreDTO>> GetAllR()
+        {
+            var condominiums = await _repository.GetAll();
 
-
-
+            return condominiums.Select(x => new CondominiumsListByRepreDTO()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Status = x.Status,
+                PostalCode = x.PostalCode,
+                GoogleMapUrl = x.GoogleMapUrl,
+                TotalArea = x.TotalArea,
+                ProfitRate = x.ProfitRate,
+                UnitTypes = x.UnitTypes,
+                UnitsPerCondominium = x.UnitsPerCondominium,
+                IncorporationDate = x.IncorporationDate,
+                Address = x.Address,
+                CreatedAt = x.CreatedAt,
+                UpdatedAt = x.UpdatedAt,
+                RepresentativeId = x.RepresentativeId
+            }).ToList();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+

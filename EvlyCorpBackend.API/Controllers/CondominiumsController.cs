@@ -46,7 +46,7 @@ namespace EvlyCorpBackend.API.Controllers
             }
             return NotFound();
         }
-        [HttpGet("/municipalities/municipalityId/condominiums")]
+        [HttpGet("/municipalities/managementCompany/condominiums")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAll();
@@ -60,6 +60,12 @@ namespace EvlyCorpBackend.API.Controllers
             {
                 return NotFound();
             }
+            return Ok(result);
+        }
+        [HttpGet("/condominiums")]
+        public async Task<IActionResult> GetAllR()
+        {
+            var result = await _service.GetAllR();
             return Ok(result);
         }
     }

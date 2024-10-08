@@ -49,7 +49,7 @@ namespace EvlyCorpBackend.CORE.DTOs
 
         public string Name { get; set; } = null!;
 
-        public string Status { get; set; } = null!;
+        public string Status { get; set; } = "ACTIVE";
 
         public string? PostalCode { get; set; }
 
@@ -82,7 +82,7 @@ namespace EvlyCorpBackend.CORE.DTOs
 
         public string Name { get; set; } = null!;
 
-        public string Status { get; set; } = null!;
+        public string Status { get; set; } = null!; 
 
         public string? PostalCode { get; set; }
 
@@ -174,6 +174,36 @@ namespace EvlyCorpBackend.CORE.DTOs
         public UsersListDTO Representative { get; set; }
         public ManagementCompanyListDTO Company { get; set; }
 
+    }
+
+    public class CondominiumsListByRepreDTO
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; } = null!;
+        public string Status { get; set; } = null!;
+
+        public string? PostalCode { get; set; }
+
+        public string? GoogleMapUrl { get; set; }
+
+        public decimal? TotalArea { get; set; }
+
+        public decimal? ProfitRate { get; set; }
+
+        public string UnitTypes { get; set; } = null!;
+
+        public int UnitsPerCondominium { get; set; }
+
+        public DateTime? IncorporationDate { get; set; }
+
+        public string? Address { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public int RepresentativeId { get; set; } 
     }
 
 

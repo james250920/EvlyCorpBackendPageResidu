@@ -9,5 +9,6 @@ namespace EvlyCorpBackend.CORE.SERVICES
         Task<CondominiumsListDTO> GetById(int id);
         Task<bool> Insert(CondominiumsInsertDTO condominium);
         Task<bool> Update(CondominiumsDTO condominium);
+        Task<IEnumerable<CondominiumsListByRepreDTO>> GetAllR();
     }
 }
