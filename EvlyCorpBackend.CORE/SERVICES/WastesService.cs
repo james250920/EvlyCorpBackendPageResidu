@@ -4,7 +4,10 @@ using EvlyCorpBackend.INFRASTRUCTURE.REPOSITORIES;
 using infrastructure.DATA;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -89,6 +92,28 @@ namespace EvlyCorpBackend.CORE.SERVICES
             return result;
            
         }
- 
+
+        public async Task<MemoryStream> ExportToCsv()
+        {
+            var wastes = await _wastesRepository.GetAll();
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream, Encoding.UTF8);
+
+            // Escribir encabezados
+            await writer.WriteLineAsync("ID,Name,Price,Measurement Unit,Created At,Updated At");
+
+            // Escribir datos
+            foreach (var waste in wastes)
+            {
+                var line = $"{waste.Id},{waste.Name},{waste.Price.ToString(CultureInfo.InvariantCulture)},{waste.MeasurementUnit},{waste.CreatedAt},{waste.UpdatedAt}";
+                await writer.WriteLineAsync(line);
+            }
+
+            await writer.FlushAsync();
+            stream.Position = 0; // Volver al inicio del stream para que se pueda leer
+            return stream;
+        }
+
+
     }
 }
